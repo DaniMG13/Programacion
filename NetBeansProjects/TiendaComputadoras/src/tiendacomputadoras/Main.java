@@ -13,6 +13,7 @@ public class Main {
         t1.BuscarComp("190");
         t1.Eliminar("190");
         t1.BuscarComp("190");
+        t1.Listar(1);
     }
 
 }
@@ -77,13 +78,7 @@ class Tienda{
         String txt = "No se han encontrado datos con ese ID";
         for(int i=0;i<conta;i++){
             if(com[i].getIdC().equals(id)){
-                txt = "Detalles del producto\n";
-                txt += "Identificador: "+com[i].getIdC()+"\n";
-                txt += "Marca del equipo: "+com[i].getMarca()+"\n";
-                txt += "Memoria de almacenamiento: "+com[i].getMem()+" GB\n";
-                txt += "Modelo del procesador: "+com[i].getProc()+"\n";
-                txt += "Sistema Operativo: "+com[i].getSo()+"\n";
-                txt += "Pecio: $"+com[i].getPrec()+" MXN\n";
+                txt = Mostrar(i);
                 break;
             }
         }
@@ -110,6 +105,34 @@ class Tienda{
         }
         
         JOptionPane.showMessageDialog(null, txt,"Resultado de eliminacion",JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    void Listar(){
+        String salida = "";
+        for(int i=0;i<conta;i++){
+            salida += Mostrar(i);
+        }
+        JOptionPane.showMessageDialog(null, salida);
+    }
+    
+    void Listar(int comp){
+        String salida = "Tienda: "+getNombreT()+"\nPropietario: "+getProp()+"\nIdentificador de la tienda: "+getId()+"\n\n";
+        for(int i=0;i<conta;i++){
+            salida += Mostrar(i);
+        }
+        JOptionPane.showMessageDialog(null, salida);
+    }
+
+    private String Mostrar(int i) {
+        String txt = "Detalles del producto\n";
+        txt += "Identificador: "+com[i].getIdC()+"\n";
+        txt += "Marca del equipo: "+com[i].getMarca()+"\n";
+        txt += "Memoria de almacenamiento: "+com[i].getMem()+" GB\n";
+        txt += "Modelo del procesador: "+com[i].getProc()+"\n";
+        txt += "Sistema Operativo: "+com[i].getSo()+"\n";
+        txt += "Pecio: $"+com[i].getPrec()+" MXN\n";
+        txt += "\n";
+        return txt;
     }
     
 }
