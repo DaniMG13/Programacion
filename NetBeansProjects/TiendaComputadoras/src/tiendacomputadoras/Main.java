@@ -1,5 +1,7 @@
 package tiendacomputadoras;
 
+import javax.swing.JOptionPane;
+
 /* @author VGSG */
 
 public class Main {
@@ -47,7 +49,8 @@ class Tienda{
 }
 
 class Computadora{
-    String idC,marca,mem,proc,so,prec;
+    private String idC,marca,mem,proc,so;
+    private double prec;
 
     public String getIdC() {
         return idC;
@@ -89,12 +92,20 @@ class Computadora{
         this.so = so;
     }
 
-    public String getPrec() {
+    public double getPrec() {
         return prec;
     }
 
-    public void setPrec(String prec) {
+    public void setPrec(double prec) {
         this.prec = prec;
     }
     
+    void AgregarCompu(){
+        idC = JOptionPane.showInputDialog("Ingresa el identificador del equipo");
+        marca = JOptionPane.showInputDialog("Ingresa la marca del equipo");
+        mem = JOptionPane.showInputDialog("Ingresa la memoria de alacenamiento del equipo");
+        proc = JOptionPane.showInputDialog("Ingresa el modelo del procesador del equipo");
+        so = JOptionPane.showInputDialog("Ingresa el Sistema Operativo del equipo");
+        prec = Double.parseDouble(JOptionPane.showInputDialog("Ingresa el identificador del equipo"));
+    }
 }
