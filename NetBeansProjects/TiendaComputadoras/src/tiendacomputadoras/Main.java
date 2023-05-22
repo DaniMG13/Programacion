@@ -11,6 +11,8 @@ public class Main {
         t1.AgregarCompu();
         t1.AgregarCompu();
         t1.BuscarComp("190");
+        t1.Eliminar("190");
+        t1.BuscarComp("190");
     }
 
 }
@@ -88,6 +90,28 @@ class Tienda{
         JOptionPane.showMessageDialog(null, txt,"Resultado de busqueda",JOptionPane.INFORMATION_MESSAGE);
     }
     
+    public void Eliminar(String id){
+        String txt = "No se han encontrado datos con ese ID";
+        for(int i=0;i<conta;i++){
+            if(com[i].getIdC().equals(id.trim())){
+                com[i] = com[conta-1];
+                txt = "Eliminacion exitosa";
+                break;
+            }
+        }
+        conta--;
+        Computadora temp[] = new Computadora[conta];
+        for(int i=0;i<conta;i++){
+            temp[i] = com[i];
+        }
+        com = new Computadora[conta];
+        for(int j=0;j<conta;j++){
+            com[j] = temp[j];
+        }
+        
+        JOptionPane.showMessageDialog(null, txt,"Resultado de eliminacion",JOptionPane.INFORMATION_MESSAGE);
+    }
+    
 }
 
 class Computadora{
@@ -143,11 +167,11 @@ class Computadora{
     }
     
     void AgregarCompu(){
-        idC = JOptionPane.showInputDialog("Ingresa el identificador del equipo");
-        marca = JOptionPane.showInputDialog("Ingresa la marca del equipo");
-        mem = JOptionPane.showInputDialog("Ingresa la memoria de alacenamiento del equipo (en Gb)");
-        proc = JOptionPane.showInputDialog("Ingresa el modelo del procesador del equipo");
-        so = JOptionPane.showInputDialog("Ingresa el Sistema Operativo del equipo");
-        prec = Double.parseDouble(JOptionPane.showInputDialog("Ingresa el precio del equipo"));
+        idC = JOptionPane.showInputDialog("Ingresa el identificador del equipo").trim();
+        marca = JOptionPane.showInputDialog("Ingresa la marca del equipo").trim();
+        mem = JOptionPane.showInputDialog("Ingresa la memoria de alacenamiento del equipo (en Gb)").trim();
+        proc = JOptionPane.showInputDialog("Ingresa el modelo del procesador del equipo").trim();
+        so = JOptionPane.showInputDialog("Ingresa el Sistema Operativo del equipo").trim();
+        prec = Double.parseDouble(JOptionPane.showInputDialog("Ingresa el precio del equipo").trim());
     }
 }
