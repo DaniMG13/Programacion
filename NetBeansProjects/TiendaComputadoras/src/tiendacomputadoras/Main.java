@@ -14,6 +14,7 @@ public class Main {
 
 class Tienda{
     Computadora com[];
+    static int conta = 0;
     private String nombreT,prop,id;
 
     public Tienda(String nombreT, String prop, String id) {
@@ -44,6 +45,25 @@ class Tienda{
 
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public void AgregarCompu(){
+        conta++;
+        if(conta==1){
+            com = new Computadora[conta];
+            com[conta-1].AgregarCompu();
+        }else{
+            Computadora temp[] = new Computadora[conta];
+            for(int i=0;i<conta-1;i++){
+                temp[i] = com[i];
+            }
+            temp[conta-1].AgregarCompu();
+        }
+                
+    }
+    
+    public void BuscarComp(){
+        
     }
     
 }
