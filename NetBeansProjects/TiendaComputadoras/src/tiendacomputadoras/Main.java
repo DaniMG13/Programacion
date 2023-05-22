@@ -7,7 +7,9 @@ import javax.swing.JOptionPane;
 public class Main {
 
     public static void main(String[] args) {
-        
+        Tienda t1 = new Tienda(JOptionPane.showInputDialog("Ingresa el nombre de la tienda"), JOptionPane.showInputDialog("Ingresa el nombre del propietario"), JOptionPane.showInputDialog("Ingresa el identificador de la tienda"));
+        t1.AgregarCompu();
+        t1.AgregarCompu();
     }
 
 }
@@ -51,13 +53,19 @@ class Tienda{
         conta++;
         if(conta==1){
             com = new Computadora[conta];
+            com[conta-1] = new Computadora();
             com[conta-1].AgregarCompu();
         }else{
             Computadora temp[] = new Computadora[conta];
             for(int i=0;i<conta-1;i++){
                 temp[i] = com[i];
             }
+            temp[conta-1] = new Computadora();
             temp[conta-1].AgregarCompu();
+            com = new Computadora[conta];
+            for(int j=0;j<conta;j++){
+                com[j] = com[j];
+            }
         }
                 
     }
@@ -126,6 +134,6 @@ class Computadora{
         mem = JOptionPane.showInputDialog("Ingresa la memoria de alacenamiento del equipo");
         proc = JOptionPane.showInputDialog("Ingresa el modelo del procesador del equipo");
         so = JOptionPane.showInputDialog("Ingresa el Sistema Operativo del equipo");
-        prec = Double.parseDouble(JOptionPane.showInputDialog("Ingresa el identificador del equipo"));
+        prec = Double.parseDouble(JOptionPane.showInputDialog("Ingresa el precio del equipo"));
     }
 }
