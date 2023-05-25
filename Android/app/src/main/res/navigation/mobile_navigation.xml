@@ -20,9 +20,9 @@
 
     <fragment
         android:id="@+id/nav_met_pago"
-        android:name="com.vgsg.myapplication.ui.gallery.GalleryFragment"
+        android:name="com.vgsg.myapplication.ui.metodos.MetodosF"
         android:label="@string/menu_met_pago"
-        tools:layout="@layout/fragment_gallery">
+        tools:layout="@layout/fragment_metodos">
         <action
             android:id="@+id/action_nav_met_pago_to_nav_home"
             app:destination="@id/nav_home" />
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/nav_recom"
-        android:name="com.vgsg.myapplication.ui.slideshow.SlideshowFragment"
+        android:name="com.vgsg.myapplication.ui.recomendaciones.RecomendacionesF"
         android:label="@string/menu_reco"
         tools:layout="@layout/fragment_slideshow">
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_pedidos"
-        android:name="com.vgsg.myapplication.ui.sampledata.PedidosFragment"
+        android:name="com.vgsg.myapplication.ui.pedidos.PedidosFragment"
         android:label="Pedidos"
         tools:layout="@layout/fragment_pedidos">
         <action

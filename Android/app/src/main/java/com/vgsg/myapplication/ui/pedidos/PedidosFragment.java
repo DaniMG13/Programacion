@@ -1,4 +1,4 @@
-package com.vgsg.myapplication.ui.sampledata;
+package com.vgsg.myapplication.ui.pedidos;
 
 import android.os.Bundle;
 
@@ -17,7 +17,7 @@ public class PedidosFragment extends Fragment {
     private String mParam2;
 
     public PedidosFragment() {
-        
+
     }
 
     public static PedidosFragment newInstance(String param1, String param2) {
