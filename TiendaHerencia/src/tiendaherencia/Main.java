@@ -114,9 +114,48 @@ class Computadoras extends Articulos{
 }
 
 class Accesorios extends Articulos{
+    private String carac;
+
+    public Accesorios(String noArt, String nombre, String marca, float precio, String carac) {
+        super(noArt, nombre, marca, precio);
+        this.carac = carac;
+    }
+
+    public String getCarac() {
+        return carac;
+    }
+
+    public void setCarac(String carac) {
+        this.carac = carac;
+    }
     
 }
 
 class Textiles extends Articulos{
+    private float talla;
+    private String color;
+
+    public Textiles(String noArt, String nombre, String marca, float precio, float talla, String color) {
+        super(noArt, nombre, marca, precio);
+        this.talla = talla;
+        this.color = color;
+    }
+
+    public float getTalla() {
+        return talla;
+    }
+
+    public void setTalla(float talla) {
+        this.talla = talla;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+    
     
 }
