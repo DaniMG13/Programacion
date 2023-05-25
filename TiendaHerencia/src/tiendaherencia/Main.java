@@ -12,6 +12,9 @@ public class Main {
 class Tienda{
     private String nombre,dueño,id;
 
+    private Articulos arts[];
+    //comentsrio
+
     public Tienda(String nombre, String dueño, String id) {
         this.nombre = nombre;
         this.dueño = dueño;
