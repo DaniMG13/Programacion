@@ -45,6 +45,56 @@ class Tienda{
 }
 
 class Articulos{
+    private String noArt,nombre,marca;
+    private float precio;
+    private int estado;
+
+    public Articulos(String noArt, String nombre, String marca, float precio) {
+        this.noArt = noArt;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.precio = precio;
+    }
+
+    public String getNoArt() {
+        return noArt;
+    }
+
+    public void setNoArt(String noArt) {
+        this.noArt = noArt;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio = precio;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
     
 }
 
