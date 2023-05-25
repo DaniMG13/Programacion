@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@mipmap/home"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_pedidos"
+            android:icon="@mipmap/pedidos"
+            android:title="@string/menu_pedidos" />
+        <item
+            android:id="@+id/nav_met_pago"
+            android:icon="@mipmap/pago"
+            android:title="@string/menu_met_pago" />
+        <item
+            android:id="@+id/nav_recom"
+            android:icon="@mipmap/reco"
+            android:title="@string/menu_reco" />
+        <item
+            android:id="@+id/nav_version"
+            android:icon="@mipmap/version"
+            android:title="@string/menu_version" />
+
+    </group>
+</menu>
