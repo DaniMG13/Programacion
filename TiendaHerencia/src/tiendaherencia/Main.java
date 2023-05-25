@@ -99,6 +99,17 @@ class Articulos{
 }
 
 class Computadoras extends Articulos{
+    private int men;
+    private String proc,so;
+
+    public Computadoras(String noArt, String nombre, String marca, float precio,int men, String proc, String so) {
+        super(noArt, nombre, marca, precio);
+        this.men = men;
+        this.proc = proc;
+        this.so = so;
+    }
+    
+    
     
 }
 
