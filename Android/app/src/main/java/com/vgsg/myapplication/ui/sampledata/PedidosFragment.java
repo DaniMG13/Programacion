@@ -1,4 +1,4 @@
-package com.vgsg.myapplication.ui;
+package com.vgsg.myapplication.ui.sampledata;
 
 import android.os.Bundle;
 
