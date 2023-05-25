@@ -8,3 +8,23 @@ public class Main {
     }
 
 }
+
+class Tienda{
+    
+}
+
+class Articulos{
+    
+}
+
+class Computadoras extends Articulos{
+    
+}
+
+class Accesorios extends Articulos{
+    
+}
+
+class Textiles extends Articulos{
+    
+}
