@@ -37,4 +37,13 @@
             android:id="@+id/action_nav_recom_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_pedidos"
+        android:name="com.vgsg.myapplication.ui.sampledata.PedidosFragment"
+        android:label="Pedidos"
+        tools:layout="@layout/fragment_pedidos">
+        <action
+            android:id="@+id/action_pedidosFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>
