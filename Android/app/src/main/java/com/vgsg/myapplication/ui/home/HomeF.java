@@ -1,5 +1,6 @@
 package com.vgsg.myapplication.ui.home;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,7 +28,20 @@ import java.util.Calendar;
 
 public class HomeF extends Fragment {
     private FragmentHomeBinding binding;
+    static int canti = 0;
+    String titulos[] = {"Hamburguesa de Soya","Hamburguesa de Pollo","Gomitas de Lombriz","Gomitas de Mango","Gomitas de Durazno","Gomitas de Manzana","Galletas con Chocolate"
+    ,"Donitas de Canela","Cafe del Dia","Chicken Bake","Brownies de Chocolate","Skwinkles rellenos","Skwinkles rellenos","Skwinkles Salsagheti","Molletes"};
+    String desc[] = {"Hamburguesa de soya con papas","Hamburguesa de pollo con papas","Gomitas de lombrices de diferentes sabores","Gomitas de mango con chile",
+            "Gomitas de durazno circulares","Gomitas de manzana circulares","Galletas con Chocolate de Costco","Donitas de canela de Costco","Vaso de cafe del dia 250ml",
+            "Chicken bake estilo costco","Browmnie de chocolate con chispas dentro","Skwinkles de sandia rellenos","Skwinkles de piña rellenos","Skwinkles salsagheti pequeños",
+            "Molletes con frijoles, queso y salsa"};
+    int image[] = {R.drawable.hambsoya,R.drawable.hambpollo,R.drawable.gomitas_l,R.drawable.mango,R.drawable.durazno,R.drawable.manzana,
+            R.drawable.gallet,R.drawable.donit,R.drawable.cafe,R.drawable.chicken,R.drawable.brown,R.drawable.sk_r_s,R.drawable.sk_r_p,
+            R.drawable.salsag,R.drawable.molle};
 
+    double prec[] = {40,50,10,10,10,10,8,4,15,40,20,15,15,12,45};
+
+    ArrayList<ListaEntrada> datos = new ArrayList<ListaEntrada>();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeVM homeVM =
@@ -37,7 +52,7 @@ public class HomeF extends Fragment {
 
         View v = binding.getRoot().getRootView();
 
-        ArrayList<ListaEntrada> datos = new ArrayList<ListaEntrada>();
+
         datos.add(new ListaEntrada(R.drawable.hambsoya,"Hamburguesa de Soya","Hamburguesa de soya con papas",40));
         datos.add(new ListaEntrada(R.drawable.hambpollo,"Hamburguesa de Pollo","Hamburguesa de pollo con papas",50));
         datos.add(new ListaEntrada(R.drawable.gomitas_l,"Gomitas de Lombriz","Gomitas de lombrices de diferentes sabores",10));
@@ -102,8 +117,56 @@ public class HomeF extends Fragment {
         ltvHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(),"Posicion: "+position,Toast.LENGTH_SHORT).show();
-                
+                //Toast.makeText(getContext(),"Posicion: "+position,Toast.LENGTH_SHORT).show();
+                View vi = getLayoutInflater().inflate( R.layout.detalles_producto, null);
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setView(vi);
+                //dialog.setTitle(titulos[position]);
+
+                ImageView imgAux = (ImageView)vi.findViewById(R.id.imvDeta);
+                imgAux.setImageResource(image[position]);
+
+                TextView lblT = (TextView)vi.findViewById(R.id.lblDeT);
+                lblT.setText(titulos[position]);
+                lblT.setTextSize(20);
+
+                TextView lblDesc = (TextView)vi.findViewById(R.id.lblDeD);
+                lblDesc.setText(desc[position]);
+
+                TextView lblcant = (TextView)vi.findViewById(R.id.lblcanti);
+
+                lblcant.setTextSize(19);
+                lblcant.setText(""+canti);
+
+                TextView lblmenos = (TextView)vi.findViewById(R.id.lblmenos);
+                lblmenos.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(canti>0){
+                            canti--;
+                            lblcant.setText(""+canti);
+                        }
+                    }
+                });
+
+                TextView lblmas = (TextView)vi.findViewById(R.id.lblmas);
+                lblmas.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(canti>=0){
+                            canti++;
+                            lblcant.setText(""+canti);
+                        }
+                    }
+                });
+
+                Button btnadd = (Button)vi.findViewById(R.id.btnADD);
+                if(!(canti==0)){
+                    //Añadir pedido al carrito
+                }
+
+                dialog.show();
             }
         });
 
