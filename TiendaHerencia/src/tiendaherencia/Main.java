@@ -1,10 +1,13 @@
 package tiendaherencia;
 
+import javax.swing.JOptionPane;
+
 /* @author VGSG */
 public class Main {
-
+static Tienda t;
     public static void main(String[] args) {
-        //Ejemplo cambios celular
+        t = new Tienda(JOptionPane.showInputDialog("Ingresa el nombre de la tienda"),JOptionPane.showInputDialog("Ingresa el nombre del dueño") , JOptionPane.showInputDialog("Ingresa el identificador de la tienda"));
+        
     }
 
 }
@@ -99,6 +102,22 @@ class Articulos{
         this.estado = estado;
     }
     
+    public String Imprimir(){
+        String disp;
+        if(getEstado()==0){
+            disp = "Disponible";
+        }else{
+            if(getEstado()==1){
+                disp = "Apartado";
+            }else{
+                disp = "Vendido";
+            }
+        }
+        String t = "No. de Articulo: "+getNoArt()+"\nNombre de Articulo: "+getNombre()+"\nMarca: "+getMarca()+
+                "\nPrecio: "+getPrecio()+"\nEstado: "+disp;
+        return t;
+    }
+    
 }
 
 class Computadoras extends Articulos{
@@ -112,6 +131,12 @@ class Computadoras extends Articulos{
         this.so = so;
     }
     
+    @Override
+    public String Imprimir(){
+        String t = Imprimir();
+        t += "\nMemoria: "+men+"\nProcesador: "+proc+"\nS.O: "+so;
+        return t;
+    }
     
     
 }
