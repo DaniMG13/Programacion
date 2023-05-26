@@ -162,9 +162,16 @@ public class HomeF extends Fragment {
                 });
 
                 Button btnadd = (Button)vi.findViewById(R.id.btnADD);
-                if(!(canti==0)){
-                    //Añadir pedido al carrito
-                }
+                btnadd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(!(canti==0)){
+                            //Añadir pedido al carrito
+                        }else{
+                            Toast.makeText(getContext(),"Para agregar al carrito debes poner en cantidad al menos 1",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
                 dialog.show();
             }
