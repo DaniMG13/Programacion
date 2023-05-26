@@ -21,7 +21,7 @@ public class VersionF extends Fragment {
     public VersionF() {
         // Required empty public constructor
     }
-    
+
     public static VersionF newInstance(String param1, String param2) {
         VersionF fragment = new VersionF();
         Bundle args = new Bundle();
