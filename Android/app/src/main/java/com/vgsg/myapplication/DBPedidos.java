@@ -18,7 +18,7 @@ public class DBPedidos extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table "+tabla+" (id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "producto TEXT NOT NULL, cantidad TEXT NOT NULL, precio_uni TEXT NOT NULL, total TEXT NOT NULL) ";
+                "producto TEXT NOT NULL, fecha TEXT NOT NULL ,cantidad TEXT NOT NULL, precio_uni TEXT NOT NULL, sub_total TEXT NOT NULL ,total TEXT NOT NULL) ";
         db.execSQL(sql);
     }
 

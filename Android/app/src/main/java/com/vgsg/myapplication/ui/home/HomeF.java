@@ -30,11 +30,16 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.vgsg.myapplication.DB;
 import com.vgsg.myapplication.DBPedidos;
+import com.vgsg.myapplication.ListaEntrada;
+import com.vgsg.myapplication.ListaAdaptador;
 import com.vgsg.myapplication.R;
 import com.vgsg.myapplication.databinding.FragmentHomeBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class HomeF extends Fragment {
     AlertDialog.Builder dialog;
@@ -47,6 +52,7 @@ public class HomeF extends Fragment {
 
     int prec[];
 
+    String sub_t = "";
     String titulo = "";
     String precios = "";
     String cantidades = "";
@@ -78,7 +84,7 @@ public class HomeF extends Fragment {
         ListView ltvHome;
         ltvHome = (ListView)v.findViewById(R.id.ltvHome);
 
-        ltvHome.setAdapter(new Lista_adaptador(getContext(), R.layout.listview, datos){
+        ltvHome.setAdapter(new ListaAdaptador(getContext(), R.layout.listview, datos){
             @Override
             public void onEntrada(Object entrada, View view) {
                 TextView texto_superior_entrada = (TextView) view.findViewById(R.id.lblTitulo);
@@ -202,6 +208,13 @@ public class HomeF extends Fragment {
                     }
                 });
 
+                dialog.setNegativeButton("Ver carrito", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        carrito();
+                    }
+                });
+
                 dialog.show();
             }
         });
@@ -261,36 +274,46 @@ public class HomeF extends Fragment {
                 lblsub.setText(sub);
                 pta = 0;
 
+                sub_t = sub;
+
                 lbltotal.setText("$ "+preciot);
 
             }while(c.moveToNext());
 
+            b.setPositiveButton("Limpiar carrito", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    DB db = new DB(getContext());
+                    SQLiteDatabase base = db.getReadableDatabase();
+                    db.Eliminar(base);
+                    Snackbar.make(getView(),"Carrito Vaciado Correctamente",BaseTransientBottomBar.LENGTH_LONG).show();
+                }
+            });
+            b.setNegativeButton("Realizar Pedido", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    Date date = new Date();
+
+                    String fecha = dateFormat.format(date);
+
+                    DBPedidos db = new DBPedidos(getContext());
+                    SQLiteDatabase data = db.getWritableDatabase();
+                    String sql = "INSERT INTO pedidos VALUES (null,'"+titulo+"','"+fecha+"','"+cantidades+"','"+precios+"'" +
+                            ",'"+sub_t+"','"+preciot+"')";
+                    data.execSQL(sql);
+                    DB d = new DB(getContext());
+                    data = d.getWritableDatabase();
+                    d.Eliminar(data);
+                }
+            });
+
         }else{
             //Toast.makeText(getContext(),"No se encontraron registros",Toast.LENGTH_LONG).show();
+            b.setNegativeButton("Regresar a comprar",null);
         }
 
-        b.setPositiveButton("Limpiar carrito", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                DB db = new DB(getContext());
-                SQLiteDatabase base = db.getReadableDatabase();
-                db.Eliminar(base);
-                Snackbar.make(getView(),"Carrito Vaciado Correctamente",BaseTransientBottomBar.LENGTH_LONG).show();
-            }
-        });
-        b.setNegativeButton("Realizar Pedido", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                DBPedidos db = new DBPedidos(getContext());
-                SQLiteDatabase data = db.getWritableDatabase();
-                String sql = "INSERT INTO pedidos VALUES (null,'"+titulo+"','"+cantidades+"','"+precios+"'" +
-                        ",'"+preciot+"')";
-                data.execSQL(sql);
-                DB d = new DB(getContext());
-                data = d.getWritableDatabase();
-                d.Eliminar(data);
-            }
-        });
         b.show();
     }
 
@@ -299,76 +322,4 @@ public class HomeF extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-}
-
-class ListaEntrada {
-    private int idImagen;
-    private String textoEncima;
-    private String textoDebajo;
-    private double precio;
-
-    public ListaEntrada (int idImagen, String textoEncima, String textoDebajo,double precio) {
-        this.idImagen = idImagen;
-        this.textoEncima = textoEncima;
-        this.textoDebajo = textoDebajo;
-        this.precio = precio;
-    }
-
-    public String get_textoEncima() {
-        return textoEncima;
-    }
-
-    public String get_textoDebajo() {
-        return textoDebajo;
-    }
-
-    public int get_idImagen() {
-        return idImagen;
-    }
-}
-
-abstract class Lista_adaptador extends BaseAdapter {
-
-    private ArrayList<?> entradas;
-    private int R_layout_IdView;
-    private Context contexto;
-
-    public Lista_adaptador(Context contexto, int R_layout_IdView, ArrayList<?> entradas) {
-        super();
-        this.contexto = contexto;
-        this.entradas = entradas;
-        this.R_layout_IdView = R_layout_IdView;
-    }
-
-    @Override
-    public View getView(int posicion, View view, ViewGroup pariente) {
-        if (view == null) {
-            LayoutInflater vi = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = vi.inflate(R_layout_IdView, null);
-        }
-        onEntrada (entradas.get(posicion), view);
-        return view;
-    }
-
-    @Override
-    public int getCount() {
-        return entradas.size();
-    }
-
-    @Override
-    public Object getItem(int posicion) {
-        return entradas.get(posicion);
-    }
-
-    @Override
-    public long getItemId(int posicion) {
-        return posicion;
-    }
-
-    /** Devuelve cada una de las entradas con cada una de las vistas a la que debe de ser asociada
-     * @param entrada La entrada que será la asociada a la view. La entrada es del tipo del paquete/handler
-     * @param view View particular que contendrá los datos del paquete/handler
-     */
-    public abstract void onEntrada (Object entrada, View view);
-
 }
