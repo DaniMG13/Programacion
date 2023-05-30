@@ -33,7 +33,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Abrir Carrito de Compras", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                        .setAction("Carrito", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        }).show();
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
