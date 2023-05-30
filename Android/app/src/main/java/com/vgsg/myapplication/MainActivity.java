@@ -86,6 +86,8 @@ float preciot;
         lbltotal.setText("");
         lblprec.setText("");
 
+        b.setTitle("Carrito de compra\n");
+
         DB db = new DB(this);
         SQLiteDatabase data = db.getReadableDatabase();
         Cursor c = data.rawQuery("select * from carrito",null);

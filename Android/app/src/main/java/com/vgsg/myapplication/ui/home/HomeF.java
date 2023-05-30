@@ -280,6 +280,8 @@ public class HomeF extends Fragment {
 
             }while(c.moveToNext());
 
+            b.setTitle("Carrito de compra\n");
+
             b.setPositiveButton("Limpiar carrito", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -306,6 +308,12 @@ public class HomeF extends Fragment {
                     DB d = new DB(getContext());
                     data = d.getWritableDatabase();
                     d.Eliminar(data);
+                    AlertDialog.Builder b= new AlertDialog.Builder(getContext());
+                    b.setTitle("Pedido realizado")
+                            .setMessage("Ahora puedes revisar el pedido en la pestaña pedidos")
+                            .setNegativeButton("Entendido",null)
+                            .setCancelable(false)
+                            .show();
                 }
             });
 

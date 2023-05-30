@@ -71,10 +71,14 @@ public class PedidosFragment extends Fragment {
         ids = new ArrayList<String>();
 
         if(c.moveToFirst()){
+            ltvPedidos.setEnabled(true);
                do{
                    names.add("ID: "+c.getInt(0)+" - Pedido del "+c.getString(2));
                    ids.add(""+c.getInt(0));
                }while(c.moveToNext());
+        }else{
+            names.add("No has realizado pedidos");
+            ltvPedidos.setEnabled(false);
         }
         c.close();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, names);
