@@ -2,6 +2,7 @@ package com.vgsg.myapplication.ui.home;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -98,6 +99,13 @@ public class HomeF extends Fragment {
 
                 ImageView imgAux = (ImageView)vi.findViewById(R.id.imvDeta);
 
+                dialog.setNegativeButton("Ver Carrito", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        carrito();
+                    }
+                });
+
                 imgAux.setImageResource(imagenes.getResourceId(position,position));
 
                 TextView lblT = (TextView)vi.findViewById(R.id.lblDeT);
@@ -170,11 +178,11 @@ public class HomeF extends Fragment {
 
                             try{
                                 data.execSQL(sql);
-
+                                canti=0;
                                 Snackbar snack = Snackbar.make(view,"Agregado Al Carrito", BaseTransientBottomBar.LENGTH_SHORT).setAction("Ver Pedidos", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-
+                                            carrito();
                                     }
                                 });
                                 snack.show();
@@ -191,6 +199,10 @@ public class HomeF extends Fragment {
         });
 
         return root;
+    }
+
+    private void carrito() {
+
     }
 
     @Override
