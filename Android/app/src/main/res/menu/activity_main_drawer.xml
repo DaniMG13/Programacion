@@ -22,10 +22,6 @@
             android:id="@+id/nav_recom"
             android:icon="@mipmap/reco"
             android:title="@string/menu_reco" />
-        <item
-            android:id="@+id/nav_version"
-            android:icon="@mipmap/version"
-            android:title="@string/menu_version" />
 
     </group>
 </menu>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.vgsg.myapplication.DB;
+import com.vgsg.myapplication.DBPedidos;
 import com.vgsg.myapplication.R;
 import com.vgsg.myapplication.databinding.FragmentHomeBinding;
 
@@ -45,6 +47,12 @@ public class HomeF extends Fragment {
 
     int prec[];
 
+    String titulo = "";
+    String precios = "";
+    String cantidades = "";
+    String sub = "";
+
+    float preciot = 0;
     ArrayList<ListaEntrada> datos = new ArrayList<ListaEntrada>();
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -202,7 +210,88 @@ public class HomeF extends Fragment {
     }
 
     private void carrito() {
+        AlertDialog.Builder b = new AlertDialog.Builder(getContext());
+        View vi = getLayoutInflater().inflate( R.layout.carrito_inf, null);
+        b.setView(vi);
 
+        TextView lblcarrito = (TextView)vi.findViewById(R.id.lblcarrito);
+        lblcarrito.setText("No tienes nada agregado al carrito");
+
+        TextView lblprec = (TextView)vi.findViewById(R.id.lbl_precio);
+        TextView lblcanti = (TextView)vi.findViewById(R.id.lblcanticar);
+        TextView lblsub = (TextView)vi.findViewById(R.id.lblsubt);
+        TextView lbltotal = (TextView)vi.findViewById(R.id.lbltotalapaga);
+        TextView lblaux = (TextView)vi.findViewById(R.id.lblauxtap);
+
+        lblaux.setText("");
+        lblsub.setText("");
+        lblcanti.setText("");
+        lblsub.setText("");
+        lbltotal.setText("");
+        lblprec.setText("");
+
+        DB db = new DB(getContext());
+        SQLiteDatabase data = db.getReadableDatabase();
+        Cursor c = data.rawQuery("select * from carrito",null);
+        if(c.moveToFirst()){
+            titulo = "";
+            precios = "";
+            cantidades = "";
+            sub = "";
+            int cantidad = 0;
+            float preciouni = 0;
+            float pta = 0;
+            preciot = 0;
+            do{
+                cantidad = c.getInt(3);
+                preciouni = c.getFloat(4);
+                pta += (cantidad*preciouni);
+                preciot += pta;
+
+                titulo += c.getString(1)+"\n";
+                lblcarrito.setText(titulo);
+
+                precios += "$ "+preciouni+"\n";
+                lblprec.setText(precios);
+
+                cantidades += " x "+String.format("%02d",cantidad)+"\n";
+                lblcanti.setText(cantidades);
+
+                sub += "$ "+pta+"\n";
+                lblsub.setText(sub);
+                pta = 0;
+
+                lbltotal.setText("$ "+preciot);
+
+            }while(c.moveToNext());
+
+        }else{
+            //Toast.makeText(getContext(),"No se encontraron registros",Toast.LENGTH_LONG).show();
+        }
+
+        b.setPositiveButton("Limpiar carrito", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DB db = new DB(getContext());
+                SQLiteDatabase base = db.getReadableDatabase();
+                db.Eliminar(base);
+                Snackbar.make(getView(),"Carrito Vaciado Correctamente",BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+        });
+        b.setNegativeButton("Realizar Pedido", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DBPedidos db = new DBPedidos(getContext());
+                SQLiteDatabase data = db.getWritableDatabase();
+                String sql = "INSERT INTO pedidos VALUES (null,'"+titulo+"','"+cantidades+"','"+precios+"'" +
+                        ",'"+preciot+"')";
+                data.execSQL(sql);
+                DB d = new DB(getContext());
+                data = d.getWritableDatabase();
+                d.Eliminar(data);
+            }
+        });
+        b.show();
     }
 
     @Override
