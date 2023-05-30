@@ -139,6 +139,9 @@ public class HomeF extends Fragment {
                 lblcant.setTextSize(19);
                 lblcant.setText(""+canti);
 
+                Button btnadd = (Button)vi.findViewById(R.id.btnADD);
+                btnadd.setEnabled(false);
+
                 TextView lblmenos = (TextView)vi.findViewById(R.id.lblmenos);
                 lblmenos.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -146,6 +149,9 @@ public class HomeF extends Fragment {
                         if(canti>0){
                             canti--;
                             lblcant.setText(""+canti);
+                        }
+                        if(canti==0){
+                            btnadd.setEnabled(false);
                         }
                     }
                 });
@@ -157,19 +163,15 @@ public class HomeF extends Fragment {
                         if(canti>=0){
                             canti++;
                             lblcant.setText(""+canti);
+                            btnadd.setEnabled(true);
                         }
                     }
                 });
 
-                Button btnadd = (Button)vi.findViewById(R.id.btnADD);
                 btnadd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!(canti==0)){
-                            //Añadir pedido al carrito
-                        }else{
-                            Toast.makeText(getContext(),"Para agregar al carrito debes poner en cantidad al menos 1",Toast.LENGTH_LONG).show();
-                        }
+                        
                     }
                 });
 
