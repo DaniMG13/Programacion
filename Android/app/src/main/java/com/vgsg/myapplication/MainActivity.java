@@ -1,7 +1,9 @@
 package com.vgsg.myapplication;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -63,6 +65,14 @@ float preciot;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        View hView = navigationView.getHeaderView(0);
+
+        TextView lbl = (TextView) hView.findViewById(R.id.lblsaludo);
+
+        SharedPreferences prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
+        lbl.setText(prefe.getString("user","Usuario"));
+
     }
 
     private void carrito() {

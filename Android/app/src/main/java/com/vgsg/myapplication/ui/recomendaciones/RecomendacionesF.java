@@ -1,7 +1,9 @@
 package com.vgsg.myapplication.ui.recomendaciones;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -63,7 +65,9 @@ public class RecomendacionesF extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.lblrecomenda;
-        //textView.setText("Recomendaciones del dia :)");
+
+        SharedPreferences prefe = this.getActivity().getSharedPreferences("datos", Context.MODE_PRIVATE);
+        textView.setText(prefe.getString("user","Usuario")+"\nRecomendaciones del dia :)");
 
         titulos = root.getResources().getStringArray(R.array.Comida);
         desc = root.getResources().getStringArray(R.array.Desc);
