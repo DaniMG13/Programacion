@@ -35,43 +35,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblDeT" />
 
+
+    <TextView
+        android:id="@+id/lblprec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="TextView"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblDeD" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblDeD">
+        app:layout_constraintTop_toBottomOf="@+id/lblprec"
+        tools:layout_editor_absoluteX="0dp">
 
         <Space
             android:layout_width="80dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" />
 
         <TextView
             android:id="@+id/lblmenos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-"
             android:layout_gravity="center"
+            android:text="-"
             android:textSize="50dp" />
 
         <Space
             android:layout_width="90dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" />
 
         <TextView
             android:id="@+id/lblcanti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="TextView"
             android:textSize="30dp"
-            android:textStyle="bold"
-            android:text="TextView" />
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="80dp"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp" />
 
         <TextView
             android:id="@+id/lblmas"

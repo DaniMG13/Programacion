@@ -2,7 +2,11 @@ package com.vgsg.myapplication.ui.home;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +24,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.vgsg.myapplication.DB;
 import com.vgsg.myapplication.R;
 import com.vgsg.myapplication.databinding.FragmentHomeBinding;
 
@@ -27,19 +34,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class HomeF extends Fragment {
+    AlertDialog.Builder dialog;
     private FragmentHomeBinding binding;
     static int canti = 0;
-    String titulos[] = {"Hamburguesa de Soya","Hamburguesa de Pollo","Gomitas de Lombriz","Gomitas de Mango","Gomitas de Durazno","Gomitas de Manzana","Galletas con Chocolate"
-    ,"Donitas de Canela","Cafe del Dia","Chicken Bake","Brownies de Chocolate","Skwinkles rellenos","Skwinkles rellenos","Skwinkles Salsagheti","Molletes"};
-    String desc[] = {"Hamburguesa de soya con papas","Hamburguesa de pollo con papas","Gomitas de lombrices de diferentes sabores","Gomitas de mango con chile",
-            "Gomitas de durazno circulares","Gomitas de manzana circulares","Galletas con Chocolate de Costco","Donitas de canela de Costco","Vaso de cafe del dia 250ml",
-            "Chicken bake estilo costco","Browmnie de chocolate con chispas dentro","Skwinkles de sandia rellenos","Skwinkles de piña rellenos","Skwinkles salsagheti pequeños",
-            "Molletes con frijoles, queso y salsa"};
-    int image[] = {R.drawable.hambsoya,R.drawable.hambpollo,R.drawable.gomitas_l,R.drawable.mango,R.drawable.durazno,R.drawable.manzana,
-            R.drawable.gallet,R.drawable.donit,R.drawable.cafe,R.drawable.chicken,R.drawable.brown,R.drawable.sk_r_s,R.drawable.sk_r_p,
-            R.drawable.salsag,R.drawable.molle};
+    String titulos[];
+    String desc[];
+    int image[];
+    TypedArray imagenes;
 
-    double prec[] = {40,50,10,10,10,10,8,4,15,40,20,15,15,12,45};
+    int prec[];
 
     ArrayList<ListaEntrada> datos = new ArrayList<ListaEntrada>();
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -52,50 +55,19 @@ public class HomeF extends Fragment {
 
         View v = binding.getRoot().getRootView();
 
+        titulos = v.getResources().getStringArray(R.array.Comida);
+        desc = v.getResources().getStringArray(R.array.Desc);
+        image = v.getResources().getIntArray(R.array.img);
+        imagenes = v.getResources().obtainTypedArray(R.array.img);
+        prec = v.getResources().getIntArray(R.array.prec);
 
-        datos.add(new ListaEntrada(R.drawable.hambsoya,"Hamburguesa de Soya","Hamburguesa de soya con papas",40));
-        datos.add(new ListaEntrada(R.drawable.hambpollo,"Hamburguesa de Pollo","Hamburguesa de pollo con papas",50));
-        datos.add(new ListaEntrada(R.drawable.gomitas_l,"Gomitas de Lombriz","Gomitas de lombrices de diferentes sabores",10));
-        datos.add(new ListaEntrada(R.drawable.mango,"Gomitas de Mango","Gomitas de mango con chile",10));
-        datos.add(new ListaEntrada(R.drawable.durazno,"Gomitas de Durazno","Gomitas de durazno circulares",10));
-        datos.add(new ListaEntrada(R.drawable.manzana,"Gomitas de Manzana","Gomitas de manzana circulares",10));
-        datos.add(new ListaEntrada(R.drawable.gallet,"Galletas con Chocolate","Galletas con Chocolate de Costco",8));
-        datos.add(new ListaEntrada(R.drawable.donit,"Donitas de Canela","Donitas de canela de Costco",4));
-        datos.add(new ListaEntrada(R.drawable.cafe,"Cafe del Dia","Vaso de cafe del dia 250ml",15));
-        datos.add(new ListaEntrada(R.drawable.chicken,"Chicken Bake","Chicken bake estilo costco",40));
-        datos.add(new ListaEntrada(R.drawable.brown,"Brownies de Chocolate","Browmnie de chocolate con chispas dentro",20));
-        datos.add(new ListaEntrada(R.drawable.sk_r_s,"Skwinkles rellenos","Skwinkles de sandia rellenos",15));
-        datos.add(new ListaEntrada(R.drawable.sk_r_p,"Skwinkles rellenos","Skwinkles de piña rellenos",15));
-        datos.add(new ListaEntrada(R.drawable.salsag,"Skwinkles Salsagheti","Skwinkles salsagheti pequeños",12));
-        datos.add(new ListaEntrada(R.drawable.molle,"Molletes","Molletes con frijoles, queso y salsa",45));
+        for(int i=0;i<titulos.length;i++){
+            datos.add(new ListaEntrada(imagenes.getResourceId(i,i),titulos[i],desc[i],prec[i]));
+            //System.out.println(prec[i]);
+        }
 
         ListView ltvHome;
         ltvHome = (ListView)v.findViewById(R.id.ltvHome);
-
-        /*/TextView saludo,comida;
-
-        saludo = (TextView)header.findViewById(R.id.lblsaludo);
-        comida = (TextView)header.findViewById(R.id.lblcomida);
-
-        Calendar cal = Calendar.getInstance();
-
-        int hora =  cal.get(Calendar.HOUR_OF_DAY);
-        try{
-            if(hora<12) {
-                saludo.setText("!Buenos dias Juan Manuel!");
-                comida.setText("¿Qué vamos a desayunar?");
-            }else{
-                if(hora>=12 && hora<19){
-                    saludo.setText("!Buenas tardes Juan Manuel!");
-                    comida.setText("¿Qué vamos a comer?");
-                }else{
-                    saludo.setText("!Buenas noches Juan Manuel!");
-                    comida.setText("¿Qué vamos a cenar?");
-                }
-            }
-        }catch(Exception e){
-            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-        }*/
 
         ltvHome.setAdapter(new Lista_adaptador(getContext(), R.layout.listview, datos){
             @Override
@@ -120,12 +92,13 @@ public class HomeF extends Fragment {
                 //Toast.makeText(getContext(),"Posicion: "+position,Toast.LENGTH_SHORT).show();
                 View vi = getLayoutInflater().inflate( R.layout.detalles_producto, null);
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog  = new AlertDialog.Builder(getContext());
                 dialog.setView(vi);
                 //dialog.setTitle(titulos[position]);
 
                 ImageView imgAux = (ImageView)vi.findViewById(R.id.imvDeta);
-                imgAux.setImageResource(image[position]);
+
+                imgAux.setImageResource(imagenes.getResourceId(position,position));
 
                 TextView lblT = (TextView)vi.findViewById(R.id.lblDeT);
                 lblT.setText(titulos[position]);
@@ -134,13 +107,19 @@ public class HomeF extends Fragment {
                 TextView lblDesc = (TextView)vi.findViewById(R.id.lblDeD);
                 lblDesc.setText(desc[position]);
 
-                TextView lblcant = (TextView)vi.findViewById(R.id.lblcanti);
+                TextView lbPrec = (TextView)vi.findViewById(R.id.lblprec);
+                lbPrec.setText("$ "+prec[position]);
 
-                lblcant.setTextSize(19);
-                lblcant.setText(""+canti);
+                TextView lblcant = (TextView)vi.findViewById(R.id.lblcanti);
 
                 Button btnadd = (Button)vi.findViewById(R.id.btnADD);
                 btnadd.setEnabled(false);
+
+                lblcant.setTextSize(19);
+                lblcant.setText(""+canti);
+                if(canti>0){
+                    btnadd.setEnabled(true);
+                }
 
                 TextView lblmenos = (TextView)vi.findViewById(R.id.lblmenos);
                 lblmenos.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +150,39 @@ public class HomeF extends Fragment {
                 btnadd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        DB db = new DB(getContext());
+                        SQLiteDatabase data = db.getWritableDatabase();
+                        if(data != null){
+                            float precio = 0;
+                            int cantidad = 0;
+                            try{
+                                cantidad = Integer.parseInt(lblcant.getText().toString());
+                                precio = Float.parseFloat(lbPrec.getText().toString().substring(1));
+                            }catch (Exception e){
+                                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                            }
 
+                            float total = precio*cantidad;
+                            //Toast.makeText(getContext(),"Base creada",Toast.LENGTH_LONG).show();
+                            String sql = "INSERT INTO CARRITO VALUES (null,'"+lblT.getText()+"','"+lblDesc.getText()+"" +
+                                    "',"+cantidad+","+precio+"" +
+                                    ","+total+")";
+
+                            try{
+                                data.execSQL(sql);
+
+                                Snackbar snack = Snackbar.make(view,"Agregado Al Carrito", BaseTransientBottomBar.LENGTH_SHORT).setAction("Ver Pedidos", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+
+                                    }
+                                });
+                                snack.show();
+
+                            }catch(SQLException e){
+                                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        }
                     }
                 });
 
@@ -212,10 +223,6 @@ class ListaEntrada {
 
     public int get_idImagen() {
         return idImagen;
-    }
-
-    public double getPrecio(){
-        return precio;
     }
 }
 

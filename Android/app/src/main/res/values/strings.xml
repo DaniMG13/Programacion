@@ -15,4 +15,42 @@
     <string name="menu_version">Version</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="Comida">
+        <item>"Hamburguesa de Soya"</item>
+        <item>"Hamburguesa de Pollo"</item>
+        <item>"Gomitas de Lombriz"</item>
+        <item>"Gomitas de Mango"</item>
+        <item>"Gomitas de Durazno"</item>
+        <item>"Gomitas de Manzana"</item>
+        <item>"Galletas con Chocolate"</item>
+        <item>"Donitas de Canela"</item>
+        <item>"Cafe del Dia"</item>
+        <item>"Chicken Bake"</item>
+        <item>"Brownies de Chocolate"</item>
+        <item>"Skwinkles rellenos"</item>
+        <item>"Skwinkles rellenos"</item>
+        <item>"Skwinkles Salsagheti"</item>
+        <item>"Molletes"</item>
+    </string-array>
+
+    <string-array name="Desc">
+        <item>"Hamburguesa de soya con papas"</item>
+        <item>"Hamburguesa de pollo con papas"</item>
+        <item>"Gomitas de lombrices de diferentes sabores"</item>
+        <item>"Gomitas de mango con chile"</item>
+        <item>"Gomitas de durazno circulares"</item>
+        <item>"Gomitas de manzana circulares"</item>
+        <item>"Galletas con Chocolate de Costco"</item>
+        <item>"Donitas de canela de Costco"</item>
+        <item>"Vaso de cafe del dia 250ml"</item>
+        <item>"Chicken bake estilo costco"</item>
+        <item>"Browmnie de chocolate con chispas dentro"</item>
+        <item>"Skwinkles de sandia rellenos"</item>
+        <item>"Skwinkles de piña rellenos"</item>
+        <item>"Skwinkles salsagheti pequeños"</item>
+        <item>"Molletes con frijoles, queso y salsa"</item>
+    </string-array>
+
+
 </resources>
