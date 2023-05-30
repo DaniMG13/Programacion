@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="img">
+        <item>@drawable/hambsoya</item>
+        <item>@drawable/hambpollo</item>
+        <item>@drawable/gomitas_l</item>
+        <item>@drawable/mango</item>
+        <item>@drawable/durazno</item>
+        <item>@drawable/manzana</item>
+        <item>@drawable/gallet</item>
+        <item>@drawable/donit</item>
+        <item>@drawable/cafe</item>
+        <item>@drawable/chicken</item>
+        <item>@drawable/brown</item>
+        <item>@drawable/sk_r_s</item>
+        <item>@drawable/sk_r_p</item>
+        <item>@drawable/salsag</item>
+        <item>@drawable/molle</item>
+    </integer-array>
+
+    <integer-array name="prec">
+        <item>40</item>
+        <item>50</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>10</item>
+        <item>8</item>
+        <item>4</item>
+        <item>15</item>
+        <item>40</item>
+        <item>20</item>
+        <item>15</item>
+        <item>15</item>
+        <item>12</item>
+        <item>45</item>
+    </integer-array>
+
+</resources>
