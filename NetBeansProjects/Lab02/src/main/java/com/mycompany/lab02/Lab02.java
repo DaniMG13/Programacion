@@ -4,43 +4,42 @@ package com.mycompany.lab02;
 public class Lab02 {
 
     public static void main(String[] args) {
-        String var_u = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
+       String uni = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
+       String a = "2,4,6,8,10,12,14";
+       String b = "1,2,3,5,8,13";
+       String c = "1,2,4,6,7,10,11,13";
        
-       String var_a = "2,4,6,8,10,12,14";
-       String var_b = "1,2,3,5,8,13";
-       String var_c = "1,2,4,6,7,10,11,13";
        
-       
-        String [] conjunto_u = var_u.split("\\,");
-        String [] conjunto_a = var_a.split("\\,");
-        String [] conjunto_ej6 = var_u.split("\\,");
-        String [] conjunto_b = var_b.split("\\,");
-        String [] conjunto_c = var_c.split("\\,");
+        String [] cu = uni.split("\\,");
+        String [] ca = a.split("\\,");
+        String [] cu2 = uni.split("\\,");
+        String [] cb = b.split("\\,");
+        String [] cc = c.split("\\,");
         
-        String [] conjunto_ej1 = new String [conjunto_u.length];
+        String [] cu1 = new String [cu.length];
        // String [] conjunto_ej1 = new String [conjunto_u.length];
         
         
-        System.out.println("U = {"+var_u+"}");
-        System.out.println("A = {"+var_a+"}");
-        System.out.println("B = {"+var_b+"}");
-        System.out.println("C = {"+var_c+"}");
+        System.out.println("U = {"+uni+"}");
+        System.out.println("A = {"+a+"}");
+        System.out.println("B = {"+b+"}");
+        System.out.println("C = {"+c+"}");
         
         System.out.println("\nComplemento de A");
         
-        for(int i=0;i<conjunto_a.length;i++)
+        for(int i=0;i<ca.length;i++)
         {
-            for(int k=0; k<conjunto_u.length;k++)
+            for(int k=0; k<cu.length;k++)
             {
-                if(conjunto_a[i].equals(conjunto_u[k]))
+                if(ca[i].equals(cu[k]))
                 {
                      
-                    conjunto_ej6[k]=null;
+                    cu2[k]=null;
                 }
             }
         }
         String salida = "{";
-        for(String v:conjunto_ej6)
+        for(String v:cu2)
         {
             if(v!=null)
             {
@@ -53,28 +52,28 @@ public class Lab02 {
 
          System.out.println( "A U B");
          int auxI=0;
-         for(int i=0;i<conjunto_a.length;i++)
+         for(int i=0;i<ca.length;i++)
         {
-            conjunto_ej1[i]=conjunto_a[i];
+            cu1[i]=ca[i];
             auxI=i;
         }
            
          auxI++;
-         for(int k=0; k<conjunto_b.length;k++)
+         for(int k=0; k<cb.length;k++)
             {
-                if(conjunto_a[k]!=conjunto_b[k])
+                if(ca[k]!=cb[k])
                 {
-                     conjunto_ej1[auxI]=conjunto_b[k];
+                     cu1[auxI]=cb[k];
                     
                 }
-                if(conjunto_a[k]==conjunto_b[k])
+                if(ca[k]==cb[k])
                 {
-                    conjunto_ej1[auxI]=null;
+                    cu1[auxI]=null;
                 }
                 auxI++;
             }
         
-         for(String v:conjunto_ej1)
+         for(String v:cu1)
         {
             if(v!=null)
             {
@@ -86,9 +85,9 @@ public class Lab02 {
         
         System.out.println("B ^ C");
         
-        for (int i=0;i<conjunto_b.length;i++)
+        for (int i=0;i<cb.length;i++)
         {
-            for (int k=0;k<conjunto_c.length;k++)
+            for (int k=0;k<cc.length;k++)
             {
                 //if
             }
