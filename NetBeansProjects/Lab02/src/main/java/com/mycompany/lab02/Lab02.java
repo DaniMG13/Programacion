@@ -4,7 +4,7 @@ package com.mycompany.lab02;
 public class Lab02 {
 
     public static void main(String[] args) {
-        String var_u = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,a,b,x";
+        String var_u = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15";
        
        String var_a = "2,4,6,8,10,12,14";
        String var_b = "1,2,3,5,8,13";
@@ -20,21 +20,13 @@ public class Lab02 {
         String [] conjunto_ej1 = new String [conjunto_u.length];
        // String [] conjunto_ej1 = new String [conjunto_u.length];
         
-        System.out.println("conjunto u");
-        for(String v:conjunto_u)
-        {
-            System.out.println(v);
-        }
-        System.out.println("conjunto a");
-        for(String v:conjunto_a)
-        {
-            System.out.println(v);
-        }
-        System.out.println("             -------------");
-       
         
+        System.out.println("U = {"+var_u+"}");
+        System.out.println("A = {"+var_a+"}");
+        System.out.println("B = {"+var_b+"}");
+        System.out.println("C = {"+var_c+"}");
         
-        System.out.println("complemento del conjunto a considerando el universo (ejercicio 6)");
+        System.out.println("\nComplemento de A");
         
         for(int i=0;i<conjunto_a.length;i++)
         {
@@ -47,19 +39,19 @@ public class Lab02 {
                 }
             }
         }
+        String salida = "{";
         for(String v:conjunto_ej6)
         {
             if(v!=null)
             {
-                System.out.println(v);
+                salida=salida+v+",";
             }
             
         }
-         System.out.println("       -----------");
-         
-         
-         
-         System.out.println( "a union con b (ejercicio 1)");
+        salida+="}";
+        System.out.println(salida+"\n");
+
+         System.out.println( "A U B");
          int auxI=0;
          for(int i=0;i<conjunto_a.length;i++)
         {
@@ -90,11 +82,9 @@ public class Lab02 {
             }
             
         }
-        System.out.println("      -------------");
+        System.out.println("\n");
         
-        
-        
-        System.out.println("b interseccion con c (ejercicio 2)");
+        System.out.println("B ^ C");
         
         for (int i=0;i<conjunto_b.length;i++)
         {
