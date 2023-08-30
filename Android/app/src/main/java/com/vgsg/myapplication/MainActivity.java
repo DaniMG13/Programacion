@@ -1,7 +1,9 @@
 package com.vgsg.myapplication;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,6 +23,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vgsg.myapplication.databinding.ActivityMainBinding;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 String titulo,precios,cantidades,sub;
@@ -59,6 +65,14 @@ float preciot;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        View hView = navigationView.getHeaderView(0);
+
+        TextView lbl = (TextView) hView.findViewById(R.id.lblsaludo);
+
+        SharedPreferences prefe=getSharedPreferences("datos", Context.MODE_PRIVATE);
+        lbl.setText(prefe.getString("user","Usuario"));
+
     }
 
     private void carrito() {
@@ -81,6 +95,8 @@ float preciot;
         lblsub.setText("");
         lbltotal.setText("");
         lblprec.setText("");
+
+        b.setTitle("Carrito de compra\n");
 
         DB db = new DB(this);
         SQLiteDatabase data = db.getReadableDatabase();
@@ -117,32 +133,41 @@ float preciot;
 
             }while(c.moveToNext());
 
+            b.setPositiveButton("Limpiar carrito", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    DB db = new DB(getApplicationContext());
+                    SQLiteDatabase base = db.getReadableDatabase();
+                    db.Eliminar(base);
+                    Snackbar.make(vi,"Carrito Vaciado Correctamente", BaseTransientBottomBar.LENGTH_LONG).show();
+                }
+            });
+            b.setNegativeButton("Realizar Pedido", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    Date date = new Date();
+
+                    String fecha = dateFormat.format(date);
+
+                    DBPedidos db = new DBPedidos(getApplicationContext());
+                    SQLiteDatabase data = db.getWritableDatabase();
+                    String sql = "INSERT INTO pedidos VALUES (null,'"+titulo+"','"+fecha+"','"+cantidades+"','"+precios+"'" +
+                            ",'"+preciot+"')";
+                    data.execSQL(sql);
+                    DB d = new DB(getApplicationContext());
+                    data = d.getWritableDatabase();
+                    d.Eliminar(data);
+                }
+            });
+
         }else{
             //Toast.makeText(getContext(),"No se encontraron registros",Toast.LENGTH_LONG).show();
+            b.setNegativeButton("Regresar a comprar",null);
         }
 
-        b.setPositiveButton("Limpiar carrito", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                DB db = new DB(getApplicationContext());
-                SQLiteDatabase base = db.getReadableDatabase();
-                db.Eliminar(base);
-                Snackbar.make(vi,"Carrito Vaciado Correctamente", BaseTransientBottomBar.LENGTH_LONG).show();
-            }
-        });
-        b.setNegativeButton("Realizar Pedido", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                DBPedidos db = new DBPedidos(getApplicationContext());
-                SQLiteDatabase data = db.getWritableDatabase();
-                String sql = "INSERT INTO pedidos VALUES (null,'"+titulo+"','"+cantidades+"','"+precios+"'" +
-                        ",'"+preciot+"')";
-                data.execSQL(sql);
-                DB d = new DB(getApplicationContext());
-                data = d.getWritableDatabase();
-                d.Eliminar(data);
-            }
-        });
+
+
         b.show();
 
     }

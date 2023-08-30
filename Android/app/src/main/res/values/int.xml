@@ -17,6 +17,17 @@
         <item>@drawable/sk_r_p</item>
         <item>@drawable/salsag</item>
         <item>@drawable/molle</item>
+        <item>@drawable/ec_r</item>
+        <item>@drawable/ec_v</item>
+        <item>@drawable/m_c</item>
+        <item>@drawable/m_p</item>
+        <item>@drawable/t_pas</item>
+        <item>@drawable/t_bis</item>
+        <item>@drawable/t_chor</item>
+        <item>@drawable/piz</item>
+        <item>@drawable/emp</item>
+        <item>@drawable/g_m</item>
+        <item>@drawable/g_q</item>
     </integer-array>
 
     <integer-array name="prec">
@@ -35,6 +46,17 @@
         <item>15</item>
         <item>12</item>
         <item>45</item>
+        <item>40</item>
+        <item>40</item>
+        <item>50</item>
+        <item>50</item>
+        <item>35</item>
+        <item>35</item>
+        <item>35</item>
+        <item>25</item>
+        <item>18</item>
+        <item>20</item>
+        <item>20</item>
     </integer-array>
 
 </resources>

@@ -3,7 +3,7 @@ package tiendaherencia;
 import javax.swing.JOptionPane;
 
 /* @author VGSG */
-public class Main {
+public class TiendHere {
 static Tienda tienda;
 static Articulos art[];
     public static void main(String[] args) {

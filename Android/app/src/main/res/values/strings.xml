@@ -32,6 +32,17 @@
         <item>"Skwinkles rellenos"</item>
         <item>"Skwinkles Salsagheti"</item>
         <item>"Molletes"</item>
+        <item>"Enchiladas"</item>
+        <item>"Enchiladas"</item>
+        <item>"Milanesa de cerdo"</item>
+        <item>"Milanesa de pollo"</item>
+        <item>"Tacos de pastor"</item>
+        <item>"Tacos de bistec"</item>
+        <item>"Tacos de chorizo"</item>
+        <item>"Minipizza"</item>
+        <item>"Empanada"</item>
+        <item>"Gordita"</item>
+        <item>"Gordita"</item>
     </string-array>
 
     <string-array name="Desc">
@@ -50,6 +61,17 @@
         <item>"Skwinkles de piña rellenos"</item>
         <item>"Skwinkles salsagheti pequeños"</item>
         <item>"Molletes con frijoles, queso y salsa"</item>
+        <item>"Enchiladas Verdes, con queso blanco espolvoreado y salsa verde"</item>
+        <item>"Enchiladas Rojas, con queso blanco espolvoreado y salsa roja"</item>
+        <item>"Milanesa de cerdo 180gr con guarnicion de frijoles y arroz"</item>
+        <item>"Milanesa de pollo 185gr con guarnicion de frijoles y arroz"</item>
+        <item>"Tacos de pastor (orden de 4)"</item>
+        <item>"Tacos de bistec (orden de 4)"</item>
+        <item>"Tacos de chorizo (orden de 4)"</item>
+        <item>"Minipizza de carnes frias (salchicha,jamon,salami)"</item>
+        <item>"Empanada de salchicha"</item>
+        <item>"Gordita de migajas"</item>
+        <item>"Gordita de queso"</item>
     </string-array>
 
 
