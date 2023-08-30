@@ -20,54 +20,74 @@ public class Lab02 {
         System.out.println("B = {"+b+"}");
         System.out.println("C = {"+c+"}");
         
-        /* Complemento de Conjunto A */
+        String[] ca1;
+        String salida = "{";
+        int aux = 0;
         
-        System.out.println("\nA'");
+        /* Conjunto A union Conjunto B */
         
+        System.out.println("\nA U B");
+        
+        /*String[] cuab = new String[100];
+        aux=0;
+        for(int i=0;i<cb.length;i++){
+            cuab[aux]=cb[i];
+            aux++;
+        }
         for(int i=0;i<ca.length;i++){
+            cuab[aux]=ca[i];
+            aux++;
+        }
+        cu = uni.split("\\,");
+        String[] cua3 = cu;
+        System.out.println("aux: "+aux);
+        for(int j=0;j<cu.length;j++){
+            for(int k=0;k<cuab.length;k++){
+                if(cu[j].equals(cuab[k])){
+                    cua3[j]=null;
+                }
+            }
+        }
+        
+        */salida = "{";/*
+        for(String v:cua3)
+        {
+            if(v!=null)
+            {
+                salida=salida+v+",";
+            }
+            
+        }
+        salida=salida.substring(0,salida.length()-1);
+        */salida+="}";
+        System.out.println(salida+"\n");
+        
+        /* Complemento de Conjunto C */
+        
+        System.out.println("C'");
+        cu2 = cu;
+        for(int i=0;i<cc.length;i++){
             for(int k=0; k<cu.length;k++){
-                if(ca[i].equals(cu[k])){
+                if(cc[i].equals(cu[k])){
                     cu2[k]=null;
                 }
             }
         }
-        String salida = "{";
-        for(String v:cu2){
-            if(v!=null){
+        salida = "{";
+        for(String v:cu2)
+        {
+            if(v!=null)
+            {
                 salida=salida+v+",";
             }
             
         }
         salida=salida.substring(0,salida.length()-1);
         salida+="}";
-        System.out.println(salida+"\n");
-        
-        /* Conjunto A Interseccion Conjunto C */
-         
-        String[] ca1 = new String[cu.length];
-        int aux = 0;
-        System.out.println( "A ^ C");
-        for(int i=0;i<ca.length;i++){
-            for(int j=0;j<cc.length;j++){
-                if(cc[j].equals(ca[i])){
-                    ca1[aux]=cc[j];
-                    aux++;
-                }
-            }
-        }
-        salida="{";
-        for(String v:ca1){
-            if(v!=null){
-                salida=salida+v+",";
-            }
-            
-        }
-        salida=salida.substring(0,salida.length()-1);
-        salida+="}";
-        System.out.println(salida+"\n");
+        System.out.println(salida+"\n"); 
         
         /* Conjunto B Interseccion Conjunto C */
-        
+        aux=0;
         ca1 = new String[cu.length];
         System.out.println( "B ^ C");
         for(int i=0;i<cb.length;i++){
@@ -89,22 +109,53 @@ public class Lab02 {
         salida+="}";
         System.out.println(salida+"\n");
         
-        /* Complemento de Conjunto C */
         
-        System.out.println("C'");
+        /* Conjunto B Interseccion Conjunto C */
+        
+        System.out.println("B U C");
+        salida="{";
+        salida+="}";
+        System.out.println(salida+"\n");
+        
+        /* Conjunto A Interseccion Conjunto C */
+        cu = uni.split("\\,");
+        String[] ca_2 = new String[cu.length];
+        aux = 0;
+        System.out.println( "A ^ C");
+        for(int i=0;i<ca.length;i++){
+            for(int j=0;j<cc.length;j++){
+                if(ca[i].equals(cc[j])){
+                    ca_2[aux]=ca[i];
+                    aux++;
+                }
+            }
+        }
+        salida="{";
+        for(String v:ca_2){
+            if(v!=null){
+                salida=salida+v+",";
+            }
+            
+        }
+        salida=salida.substring(0,salida.length()-1);
+        salida+="}";
+        System.out.println(salida+"\n");
+        
+        /* Complemento de Conjunto A */
+        
+        System.out.println("A'");
+        salida = "{";
         cu2 = cu;
-        for(int i=0;i<cc.length;i++){
+        for(int i=0;i<ca.length;i++){
             for(int k=0; k<cu.length;k++){
-                if(cc[i].equals(cu[k])){
+                if(ca[i].equals(cu[k])){
                     cu2[k]=null;
                 }
             }
         }
-        salida = "{";
-        for(String v:cu2)
-        {
-            if(v!=null)
-            {
+        
+        for(String v:cu2){
+            if(v!=null){
                 salida=salida+v+",";
             }
             
@@ -179,33 +230,6 @@ public class Lab02 {
         salida+="}";
         System.out.println(salida+"\n");
         
-        /* Conjunto A union Conjunto B */
-        
-        System.out.println("A U B");
-        
-        String[] cuu = new String[cu.length];
-        aux=0;
-        for(int j=0;j<ca.length;j++){
-            for(int k=0;k<cb.length;k++){
-                if(ca[j].equals(cb[k])){
-                   cuu[aux] = ca[j];
-                   aux++;
-                }
-            }
-        }
-        
-        salida = "{";
-        for(String v:cuu)
-        {
-            if(v!=null)
-            {
-                salida=salida+v+",";
-            }
-            
-        }
-        salida=salida.substring(0,salida.length()-1);
-        salida+="}";
-        System.out.println(salida+"\n");
         
     }
 }
