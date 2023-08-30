@@ -22,23 +22,18 @@ public class Lab02 {
         
         /* Complemento de Conjunto A */
         
-        System.out.println("\nComplemento de A");
+        System.out.println("\nA'");
         
-        for(int i=0;i<ca.length;i++)
-        {
-            for(int k=0; k<cu.length;k++)
-            {
-                if(ca[i].equals(cu[k]))
-                {
+        for(int i=0;i<ca.length;i++){
+            for(int k=0; k<cu.length;k++){
+                if(ca[i].equals(cu[k])){
                     cu2[k]=null;
                 }
             }
         }
         String salida = "{";
-        for(String v:cu2)
-        {
-            if(v!=null)
-            {
+        for(String v:cu2){
+            if(v!=null){
                 salida=salida+v+",";
             }
             
@@ -61,10 +56,8 @@ public class Lab02 {
             }
         }
         salida="{";
-        for(String v:ca1)
-        {
-            if(v!=null)
-            {
+        for(String v:ca1){
+            if(v!=null){
                 salida=salida+v+",";
             }
             
@@ -86,10 +79,8 @@ public class Lab02 {
             }
         }
         salida="{";
-        for(String v:ca1)
-        {
-            if(v!=null)
-            {
+        for(String v:ca1){
+            if(v!=null){
                 salida=salida+v+",";
             }
             
@@ -100,14 +91,11 @@ public class Lab02 {
         
         /* Complemento de Conjunto C */
         
-        System.out.println("\nComplemento de C");
+        System.out.println("C'");
         cu2 = cu;
-        for(int i=0;i<cc.length;i++)
-        {
-            for(int k=0; k<cu.length;k++)
-            {
-                if(cc[i].equals(cu[k]))
-                {
+        for(int i=0;i<cc.length;i++){
+            for(int k=0; k<cu.length;k++){
+                if(cc[i].equals(cu[k])){
                     cu2[k]=null;
                 }
             }
@@ -127,7 +115,97 @@ public class Lab02 {
         
         /* Conjunto B diferencia Conjunto A */ 
         
+        System.out.println("B - A");
         
+        ca1 = cb;
+        for(int i=0;i<cb.length;i++){
+            for(int j=0;j<ca.length;j++){
+                if(ca[j].equals(cb[i])){
+                    ca1[i]=null;
+                }
+            }
+        }
+        salida="{";
+        for(String v:ca1){
+            if(v!=null){
+                salida=salida+v+",";
+            }
+            
+        }
+        salida=salida.substring(0,salida.length()-1);
+        salida+="}";
+        System.out.println(salida+"\n");
+        
+        /* Conjunto C diferencia Conjunto B Complemento */
+
+        //COMPLEMENTO DE B 
+        System.out.println("C - B'");
+        
+        cb = b.split("\\,");
+        cu = uni.split("\\,");
+        String[] ccb = cu;
+        for(int i=0;i<cb.length;i++){
+            for(int k=0; k<cu.length;k++){
+                if(cb[i].equals(cu[k])){
+                    ccb[k]=null;
+                }
+            }
+        }
+        
+        //DIFERENCIA
+        
+        cc = c.split("\\,");
+        String[] cc2 = cc;
+        for(int i=0;i<ccb.length;i++){
+            for(int j=0;j<cc.length;j++){
+                if(ccb[i]!=null){
+                    if(ccb[i].equals(cc[j])){
+                    cc2[j]=null;
+                }
+                }
+            }
+        }
+        
+        salida = "{";
+        for(String v:cc2)
+        {
+            if(v!=null)
+            {
+                salida=salida+v+",";
+            }
+            
+        }
+        salida=salida.substring(0,salida.length()-1);
+        salida+="}";
+        System.out.println(salida+"\n");
+        
+        /* Conjunto A union Conjunto B */
+        
+        System.out.println("A U B");
+        
+        String[] cuu = new String[cu.length];
+        aux=0;
+        for(int j=0;j<ca.length;j++){
+            for(int k=0;k<cb.length;k++){
+                if(ca[j].equals(cb[k])){
+                   cuu[aux] = ca[j];
+                   aux++;
+                }
+            }
+        }
+        
+        salida = "{";
+        for(String v:cuu)
+        {
+            if(v!=null)
+            {
+                salida=salida+v+",";
+            }
+            
+        }
+        salida=salida.substring(0,salida.length()-1);
+        salida+="}";
+        System.out.println(salida+"\n");
         
     }
 }
