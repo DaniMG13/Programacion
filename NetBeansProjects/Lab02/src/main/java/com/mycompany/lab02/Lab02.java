@@ -20,7 +20,7 @@ public class Lab02 {
         System.out.println("B = {"+b+"}");
         System.out.println("C = {"+c+"}");
         
-        String[] ca1;
+        String[] ca1 = new String[cu.length];
         String salida = "{";
         int aux = 0;
         
@@ -28,38 +28,31 @@ public class Lab02 {
         
         System.out.println("\nA U B");
         
-        /*String[] cuab = new String[100];
-        aux=0;
-        for(int i=0;i<cb.length;i++){
-            cuab[aux]=cb[i];
+        for (int i=0;i<ca.length;i++){
+            ca1[i]=ca[i];
+            aux=i;
+        }
+        aux++;
+        for(int k=0;k<cb.length;k++){
+            ca1[aux]=cb[k];
             aux++;
         }
+        aux=ca.length;
         for(int i=0;i<ca.length;i++){
-            cuab[aux]=ca[i];
-            aux++;
-        }
-        cu = uni.split("\\,");
-        String[] cua3 = cu;
-        System.out.println("aux: "+aux);
-        for(int j=0;j<cu.length;j++){
-            for(int k=0;k<cuab.length;k++){
-                if(cu[j].equals(cuab[k])){
-                    cua3[j]=null;
+            for(int j=0;j<cb.length;j++){
+                if(ca1[i].equals(ca1[aux+j])){
+                    ca1[aux+j]=null;
                 }
             }
         }
-        
-        */salida = "{";/*
-        for(String v:cua3)
-        {
-            if(v!=null)
-            {
-                salida=salida+v+",";
+        salida = "{";
+        for(String v:ca1){
+            if(v!=null){
+                salida+=v+",";
             }
-            
         }
         salida=salida.substring(0,salida.length()-1);
-        */salida+="}";
+        salida+="}";
         System.out.println(salida+"\n");
         
         /* Complemento de Conjunto C */
@@ -189,7 +182,7 @@ public class Lab02 {
         
         /* Conjunto C diferencia Conjunto B Complemento */
 
-        //COMPLEMENTO DE B 
+       //COMPLEMENTO DE B 
         System.out.println("C - B'");
         
         cb = b.split("\\,");
@@ -231,5 +224,5 @@ public class Lab02 {
         System.out.println(salida+"\n");
         
         
-    }
+    } 
 }
