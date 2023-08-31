@@ -45,6 +45,26 @@ public class Lab02 {
                 }
             }
         }
+        
+        int n1,n2,na,conta;
+        n1=n2=na=conta=0;
+        
+        for(int i=0;i<ca1.length;i++){
+            if(ca1[i]!=null){
+                conta++;
+            }
+        }
+        
+        String[] union = new String[conta];
+        conta=0;
+        for(int i=0;i<ca1.length;i++){
+            if(ca1[i]!=null){
+                union[conta]=ca1[i];
+                conta++;
+            }
+        }
+        
+        
         salida = "{";
         for(String v:ca1){
             if(v!=null){
@@ -106,7 +126,50 @@ public class Lab02 {
         /* Conjunto B Interseccion Conjunto C */
         
         System.out.println("B U C");
-        salida="{";
+        
+        for (int i=0;i<cb.length;i++){
+            ca1[i]=cb[i];
+            aux=i;
+        }
+        aux++;
+        for(int k=0;k<cc.length;k++){
+            ca1[aux]=cc[k];
+            aux++;
+        }
+        aux=cb.length;
+        for(int i=0;i<cb.length;i++){
+            for(int j=0;j<cc.length;j++){
+                if(ca1[i].equals(ca1[aux+j])){
+                    ca1[aux+j]=null;
+                }
+            }
+        }
+        
+        n1=n2=na=conta=0;
+        
+        for(int i=0;i<ca1.length;i++){
+            if(ca1[i]!=null){
+                conta++;
+            }
+        }
+        
+        union = new String[conta];
+        conta=0;
+        for(int i=0;i<ca1.length;i++){
+            if(ca1[i]!=null){
+                union[conta]=ca1[i];
+                conta++;
+            }
+        }
+        
+        
+        salida = "{";
+        for(String v:ca1){
+            if(v!=null){
+                salida+=v+",";
+            }
+        }
+        salida=salida.substring(0,salida.length()-1);
         salida+="}";
         System.out.println(salida+"\n");
         
