@@ -69,7 +69,7 @@ public class Evaluaciones_Salida {
                 writer.write(evaluados[i]);
             }
             writer.close();
-            System.out.println("Archivo generado en: "+ruta);
+            System.out.println("\nArchivo generado en: "+ruta);
         } catch (IOException ex) {
             Logger.getLogger(Evaluaciones_Salida.class.getName()).log(Level.SEVERE, null, ex);
         }
