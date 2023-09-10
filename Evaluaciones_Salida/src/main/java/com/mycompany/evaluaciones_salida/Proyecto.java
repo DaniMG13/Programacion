@@ -8,7 +8,7 @@ import java.io.FileReader;
 public class Proyecto {
     String empresa, folio, proyecto;
     float monto;
-    static String rutaP = "C:\\rutanew\\proyecto.txt";
+    static String rutaP = "C:\\Users\\sergi\\Documents\\ED_CVS\\proyectos.csv";
     static String separador = "\\|";
     //Constructores
     public Proyecto(){ //recuperar proyectos       
