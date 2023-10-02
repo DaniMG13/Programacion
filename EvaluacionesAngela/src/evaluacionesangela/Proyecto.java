@@ -1,5 +1,5 @@
-package com.mycompany.evaluaciones;
-
+package evaluacionesangela;
+/* @author Angela */
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -7,7 +7,8 @@ public class Proyecto extends Sistema
 {
     String empresa, folio, proyecto;
     float monto;
-    static String ruta = "C:\\rutanew\\proyecto.txt";
+    static String ruta = "C:\\rutanew\\proyectos.csv";
+    static String ruta_salida = "C:\\rutanew\\proyectos_salida.csv";
     static String separador = "\\|";
     //Constructores
     public Proyecto(){ //recuperar proyectos       
@@ -64,3 +65,5 @@ public class Proyecto extends Sistema
         this.monto = v_monto;
     }
 }
+
+

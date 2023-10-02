@@ -14,6 +14,7 @@ public class Proyectos extends Proyecto{
         super(v_folio);
     }
     public void getAll(){
+        lista.clear();
         try(BufferedReader bufferLectura = new BufferedReader(new FileReader(rutaP))){//Este comando ayuda a acceder un archivo desde la ruta que le hemos asignado
             String linea = bufferLectura.readLine();
             while(linea != null)
@@ -26,6 +27,48 @@ public class Proyectos extends Proyecto{
                 this.empresa = campos[1];
                 this.proyecto = campos[2];
                 this.monto = Float.parseFloat(campos[3]);
+                linea = bufferLectura.readLine();//debe haber un fin del ciclo
+            }
+        }catch(Exception ex){            
+        }
+    }
+    public void getAllEmpresas(String empresa){
+        lista.clear();
+        try(BufferedReader bufferLectura = new BufferedReader(new FileReader(rutaP))){//Este comando ayuda a acceder un archivo desde la ruta que le hemos asignado
+            String linea = bufferLectura.readLine();
+            while(linea != null)
+            {
+                String[] campos = new String[4];
+                campos = linea.split(separador); 
+                if(campos[1].equals(empresa)){
+                    lista.add(new Proyecto(this.folio));
+                    this.folio = campos[0];
+                    this.empresa = campos[1];
+                    this.proyecto = campos[2];
+                    this.monto = Float.parseFloat(campos[3]);
+                }
+                
+                linea = bufferLectura.readLine();//debe haber un fin del ciclo
+            }
+        }catch(Exception ex){            
+        }
+    }
+    public void getAllEmpresasDif(String empresa){
+        lista.clear();
+        try(BufferedReader bufferLectura = new BufferedReader(new FileReader(rutaP))){//Este comando ayuda a acceder un archivo desde la ruta que le hemos asignado
+            String linea = bufferLectura.readLine();
+            while(linea != null)
+            {
+                String[] campos = new String[4];
+                campos = linea.split(separador); 
+                if(!campos[1].equals(empresa)){
+                    lista.add(new Proyecto(this.folio));
+                    this.folio = campos[0];
+                    this.empresa = campos[1];
+                    this.proyecto = campos[2];
+                    this.monto = Float.parseFloat(campos[3]);
+                }
+                
                 linea = bufferLectura.readLine();//debe haber un fin del ciclo
             }
         }catch(Exception ex){            
