@@ -8,7 +8,7 @@ def Hora():
     return auxiliar
 
 id = 1
-titulos = "ID_TRABAJO|HORA_LLEGADA|TIEMPO_CPU|PRIORIDAD"
+titulos = "ID_TRABAJO|HORA_LLEGADA|TIEMPO_CPU|PRIORIDAD\n"
 proyeMin = 20
 proyeMax = 100
 prioriMin = 1
@@ -20,6 +20,7 @@ proceMax = 4
 procesa = random.randint(proceMin,proceMax)
 proye = random.randint(proyeMin,proyeMax)
 proyectos = []
+proyectos.append(titulos)
 for n in range(proye):
     aux = " "+str(id).zfill(2)+"|"
     aux = aux + str(Hora())+"|"
