@@ -45,7 +45,7 @@ public class Procesos extends Proceso{
                 for(int j=1;j<cola.size();j++){
                     //System.out.println("Cola:"+cola.size());
                     System.out.println("ID: "+proceso.getId());
-                    System.out.println("Cola Prioridad: "+cola.get(i).getPrioridad()+"\nProceso Prioridad: "+proceso.getPrioridad());
+                    //System.out.println("Cola Prioridad: "+cola.get(i).getPrioridad()+"\nProceso Prioridad: "+proceso.getPrioridad());
                     if(cola.get(i).getPrioridad()<proceso.getPrioridad()){
                         banMenor = true;
                     }else{
