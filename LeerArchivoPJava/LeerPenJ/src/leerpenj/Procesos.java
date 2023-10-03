@@ -27,36 +27,45 @@ public class Procesos extends Proceso{
                 }catch(NumberFormatException e){
                     System.err.println("Error en casteo a int: "+e.getMessage());
                 }
+                Encolar(paux);
                 linea = bufferLectura.readLine();//debe haber un fin del ciclo
-            }
-            Encolar(lista);
+            }   
         }catch(Exception ex){
             System.err.println("Error en Buffered (Procesos): "+ex.getMessage());
         }
     }
     
-    public void Encolar(ArrayList<Proceso> proceso){
+    public void Encolar(Proceso proceso){
         if(cola.isEmpty()){
-           cola.add(proceso.get(0));
+           cola.add(proceso);
         }else{
-            System.out.println("Cola:"+cola.size());
-            for(int i=0;i<proceso.size();i++){
-                if(cola.get(i).getPrioridad()<proceso.get(i).getPrioridad()){
-                    cola.add(i,proceso.get(i));
-                }
-                if(cola.get(i).getPrioridad()>proceso.get(i).getPrioridad()){
-                    cola.add(proceso.get(i));
+            boolean banMenor = false;
+            int ix = 0;
+            for(int i=1;i<cola.size();i++){
+                for(int j=1;j<cola.size();j++){
+                    //System.out.println("Cola:"+cola.size());
+                    System.out.println("ID: "+proceso.getId());
+                    System.out.println("Cola Prioridad: "+cola.get(i).getPrioridad()+"\nProceso Prioridad: "+proceso.getPrioridad());
+                    if(cola.get(i).getPrioridad()<proceso.getPrioridad()){
+                        banMenor = true;
+                    }else{
+                        banMenor = false;
+                    }
+                    ix = i;
                 }
             }
-        }
-        for(int i=0;i<lista.size();i++){
-                System.out.println(lista.get(i).getProceso());
+            
+            if(banMenor){
+                cola.add(ix,proceso);
+            }else{
+                cola.add(proceso);
+            }
         }
     }
     
     public void Imprimir(){
-        for(int i=0;i<lista.size();i++){
-            System.out.println(lista.get(i).getProceso());
+        for(int i=0;i<cola.size();i++){
+            System.out.println(cola.get(i).getProceso());
         }
     }
     
