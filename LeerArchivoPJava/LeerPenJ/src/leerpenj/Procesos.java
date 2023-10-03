@@ -27,31 +27,30 @@ public class Procesos extends Proceso{
                 }catch(NumberFormatException e){
                     System.err.println("Error en casteo a int: "+e.getMessage());
                 }
-                Encolar(paux);
                 linea = bufferLectura.readLine();//debe haber un fin del ciclo
             }
-            
+            Encolar(lista);
         }catch(Exception ex){
             System.err.println("Error en Buffered (Procesos): "+ex.getMessage());
         }
     }
     
-    public void Encolar(Proceso paux){
+    public void Encolar(ArrayList<Proceso> proceso){
         if(cola.isEmpty()){
-           cola.add(paux);
+           cola.add(proceso.get(0));
         }else{
             System.out.println("Cola:"+cola.size());
-            for(int i=0;i<cola.size();i++){
-                if(cola.get(i).getPrioridad()<paux.getPrioridad()){
-                    cola.add(i,paux);
+            for(int i=0;i<proceso.size();i++){
+                if(cola.get(i).getPrioridad()<proceso.get(i).getPrioridad()){
+                    cola.add(i,proceso.get(i));
                 }
-                if(cola.get(i).getPrioridad()>paux.getPrioridad()){
-                    cola.add(paux);
+                if(cola.get(i).getPrioridad()>proceso.get(i).getPrioridad()){
+                    cola.add(proceso.get(i));
                 }
             }
         }
-        for(int i=0;i<cola.size();i++){
-                System.out.println(cola.get(i).getProceso());
+        for(int i=0;i<lista.size();i++){
+                System.out.println(lista.get(i).getProceso());
         }
     }
     
