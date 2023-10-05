@@ -8,6 +8,7 @@ public class Evaluaciones
         Proyecto p3 = new Proyecto("C");
         Proyectos p4 = new Proyectos();
         p4.getAll();             
+        //System.out.println(p1.(0,0));
         for (int i = 0; i < p4.lista.size(); i++) {
          System.out.println(p4.lista.get(i).getProyecto());         
         }          
