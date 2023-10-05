@@ -16,7 +16,6 @@ sleepMin = 1
 sleepMax = 2
 proceMin = 1
 proceMax = 4
-procesa = random.randint(proceMin,proceMax)
 proye = random.randint(proyeMin,proyeMax)
 proyectos = []
 for n in range(proye):
@@ -24,6 +23,7 @@ for n in range(proye):
     aux = aux + str(Hora())+"|"
     priori = random.randint(prioriMin,prioriMax)
     sleep = random.randint(sleepMin,sleepMax)
+    procesa = random.randint(proceMin,proceMax)
     aux = aux + str(procesa).zfill(2)+"|"+str(priori).zfill(2)+"\n"
     id = id+1
     #print(aux)

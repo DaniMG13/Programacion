@@ -9,6 +9,7 @@ public class Proceso {
     int id,cpu,prioridad;
     String hora;
     static final String rutaP = "C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\archivo.dat";
+    static final String rutaS = "C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\archivoSalida.dat";
 
     public Proceso() {
     }
@@ -42,6 +43,33 @@ public class Proceso {
         }
     }
 
+    public Proceso getID(int id){
+        Proceso paux = null;
+        try(BufferedReader bufferLectura = new BufferedReader(new FileReader(rutaP))){
+            //Estecomando ayuda a acceder un archivo desde la ruta que le hemos asignado
+            String linea = bufferLectura.readLine();
+            while(linea != null){
+                String[] campos = new String[4];
+                campos = linea.split(separador);
+                if(Integer.parseInt(campos[0])==id){
+                    try{
+                        this.id = Integer.parseInt(campos[0]);
+                        this.hora = campos[1];
+                        this.cpu = Integer.parseInt(campos[2]);
+                        this.prioridad = Integer.parseInt(campos[3]);
+                        paux = new Proceso(this.id,this.hora,this.cpu,this.prioridad);
+                    }catch(Exception e){
+                        System.err.println("Error en casteo a int: "+e.getMessage());
+                    }
+                }
+                linea = bufferLectura.readLine();//debe haber un fin del ciclo
+            }
+        }catch(Exception ex){
+            System.err.println("Error del Buffered (Proceso): "+ex.getMessage());
+        }
+        return paux;
+    }
+    
     public String getProceso(){
         String aux = this.id+" "+this.hora+" "+this.cpu+" "+this.prioridad;
         return aux;
