@@ -8,8 +8,8 @@ public class Proceso {
     static String separador = "\\|";
     int id,cpu,prioridad;
     String hora;
-    static final String rutaP = "C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\archivo.dat";
-    static final String rutaS = "C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\archivoSalida.dat";
+    static final String rutaP = "C:\\Users\\sergi\\Documents\\GitHub\\Programacion\\Programacion\\archivo.dat";
+    static final String rutaS = "C:\\Users\\sergi\\Documents\\GitHub\\Programacion\\Programacion\\archivoSalida.dat";
 
     public Proceso() {
     }

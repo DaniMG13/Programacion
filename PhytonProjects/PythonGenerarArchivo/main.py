@@ -13,10 +13,11 @@ proyeMax = 100
 prioriMin = 1
 prioriMax = 5
 sleepMin = 1
-sleepMax = 2
+sleepMax = 4
 proceMin = 1
 proceMax = 4
 proye = random.randint(proyeMin,proyeMax)
+print("Proyectos:"+str(proye))
 proyectos = []
 for n in range(proye):
     aux = str(id).zfill(2)+"|"
@@ -24,10 +25,10 @@ for n in range(proye):
     priori = random.randint(prioriMin,prioriMax)
     sleep = random.randint(sleepMin,sleepMax)
     procesa = random.randint(proceMin,proceMax)
-    aux = aux + str(procesa).zfill(2)+"|"+str(priori).zfill(2)+"\n"
+    aux = aux + str(sleep).zfill(2)+"|"+str(priori).zfill(2)+"\n"
     id = id+1
-    #print(aux)
     proyectos.append(aux)
+    print(aux)
     time.sleep(sleep)
 with open("archivo.dat","w") as archivo:
     for n in proyectos:
