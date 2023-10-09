@@ -73,9 +73,7 @@ public class Procesos extends Proceso{
         try{
             String aux = "";
             FileWriter writer = new FileWriter(archivo);
-            String
-                    
-                    [] procesos = new String[cola.size()];
+            String [] procesos = new String[cola.size()];
             writer.write("ID|HLLEGADA|H_SALIDA|CPU|PRIORIDAD\n");
             writer.close();
             for(int i=0;i<procesos.length;i++){
