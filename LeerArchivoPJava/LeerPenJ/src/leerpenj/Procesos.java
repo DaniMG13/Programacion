@@ -35,6 +35,7 @@ public class Procesos extends Proceso{
                 }
                 linea = bufferLectura.readLine();//debe haber un fin del ciclo
             }
+            
             Encolar(lista);
         }catch(Exception ex){
             System.err.println("Error en Buffered (Procesos): "+ex.getMessage());
@@ -74,25 +75,25 @@ public class Procesos extends Proceso{
             FileWriter writer = new FileWriter(archivo);
             String[] procesos = new String[cola.size()];
             writer.write("ID|HLLEGADA|H_SALIDA|CPU|PRIORIDAD\n");
+            writer.close();
             for(int i=0;i<procesos.length;i++){
                 aux+=String.format("%02d", cola.get(i).getId())+"|";
-                aux+=cola.get(i).getHora()+"|";
+                aux+=hora()+"|";
+                try{
+                    Thread.sleep(cola.get(i).getCpu()*1000);
+                }catch(Exception e){
+                    System.out.println("Error Thread: "+e.getMessage());
+                }
                 aux+=hora()+"|";
                 aux+=String.format("%02d",cola.get(i).getCpu())+"|";
                 aux+=String.format("%02d",cola.get(i).getPrioridad())+"\n";
                 procesos[i] = aux;
                 System.out.println(aux);
+                writer = new FileWriter(archivo,true);
+                writer.append(aux);
+                writer.close();
                 aux="";
-                try{
-                    Thread.sleep(cola.get(i).getCpu()*1000);
-                }catch(Exception e){
-                    System.out.println("Error Thread: "+e.getMessage());
-                }    
             }
-            for(int j=0;j<procesos.length;j++){
-                writer.append(procesos[j]);
-            }
-            writer.close();
         }catch(IOException e){
             System.err.println("Error archivo: "+e.getMessage());
         } 
