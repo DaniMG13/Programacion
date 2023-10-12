@@ -30,7 +30,7 @@ for n in range(proye):
     proyectos.append(aux)
     print(aux)
     time.sleep(sleep)
-with open("archivo.dat","w") as archivo:
+with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\archivo.dat","w") as archivo:
     for n in proyectos:
         archivo.write(n)
 archivo.close()    
