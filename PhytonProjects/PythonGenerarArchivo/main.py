@@ -17,8 +17,8 @@ sleepMax = 4
 proceMin = 1
 proceMax = 4
 proye = random.randint(proyeMin,proyeMax)
-print("Proyectos:"+str(proye))
-proyectos = []
+##print("Proyectos:"+str(proye))
+ban = 0
 for n in range(proye):
     aux = str(id).zfill(2)+"|"
     aux = aux + str(Hora())+"|"
@@ -27,10 +27,8 @@ for n in range(proye):
     procesa = random.randint(proceMin,proceMax)
     aux = aux + str(sleep).zfill(2)+"|"+str(priori).zfill(2)+"\n"
     id = id+1
-    proyectos.append(aux)
     print(aux)
-    time.sleep(sleep)
-with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\archivo.dat","w") as archivo:
-    for n in proyectos:
-        archivo.write(n)
-archivo.close()    
+    time.sleep(sleep)    
+    with open("archivo.dat","a") as archivo:
+        archivo.write(aux)
+        archivo.close()    
