@@ -10,6 +10,10 @@ class Genera:
     sleepPeatonal = 1
     sleepVehiculos = 4
     sleepCiclista = 4
+    lista = []
+    listaAuto = []
+    listaCicli = []
+    listaPea = []
 
     def Hora(self):
         horaactual = datetime.datetime.now()
@@ -26,11 +30,7 @@ class Genera:
                 auxiliar = "AUTOMOVIL"
         return auxiliar
 
-    def Main(self):
-        datos = random.randint(self.datosMin,self.datosMax)
-        with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivo.dat","w") as archivo:
-            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
-            archivo.close()
+    def Agregar(self,datos):
         for n in range(datos):
             aux = "|"+str(self.id).zfill(3)+"|"
             aux = aux + str(self.Hora())+"|"
@@ -40,8 +40,53 @@ class Genera:
             self.id = self.id+1
             with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivo.dat","a") as archivo:
                 archivo.write(aux)
+                self.lista.append(aux)
             archivo.close()
             time.sleep(random.randint(1,4))
 
+    def Crear(self):
+        datos = random.randint(self.datosMin,self.datosMax)
+        with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivo.dat","w") as archivo:
+            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+            archivo.close()
+        self.Agregar(datos)
+
+    def Procesar(self):
+        with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoPetaon.dat","w") as archivo:
+            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+        archivo.close()
+        with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoCiclista.dat","w") as archivo:
+            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+        archivo.close()
+        with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoAuto.dat","w") as archivo:
+            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+        archivo.close()
+        with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivo.dat","r") as archivo:
+            linea = archivo.__next__()
+            for linea in archivo:
+                array = linea.split("|")
+                if(array[3]=="1"):
+                    with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoPetaon.dat","a") as archivo:
+                        archivo.write(linea)
+                        self.listaPea.append(linea)
+                    archivo.close()
+                if(array[3]=="2"):
+                    with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoCiclista.dat","a") as archivo:
+                        archivo.write(linea)
+                        self.listaCicli.append(linea)
+                    archivo.close()
+                if(array[3]=="3"):
+                    with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoAuto.dat","a") as archivo:
+                        archivo.write(linea)
+                        self.listaAuto.append(linea)
+                    archivo.close()  
+
+    def Encolar(self):
+        print(self.listaAuto)
+        
+
 genera = Genera()
-genera.Main()
+#genera.Crear()
+genera.Procesar()
+#print(genera.lista)
+genera.Encolar()
