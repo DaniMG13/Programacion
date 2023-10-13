@@ -36,6 +36,7 @@ class Genera:
             aux = aux + str(self.Hora())+"|"
             priori = random.randint(self.prioriMin,self.prioriMax)
             aux = aux + str(priori).zfill(1)
+            aux = aux + "|"+str(random.randint(1,5))
             aux = aux + "|"+self.Tipo(priori)+"|\n"
             self.id = self.id+1
             with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivo.dat","a") as archivo:
@@ -47,19 +48,19 @@ class Genera:
     def Crear(self):
         datos = random.randint(self.datosMin,self.datosMax)
         with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivo.dat","w") as archivo:
-            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+            archivo.write("|_ID|HO_LLEGA|P|T|T_TRAFICO|\n")
             archivo.close()
         self.Agregar(datos)
 
     def Procesar(self):
         with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoPetaon.dat","w") as archivo:
-            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+            archivo.write("|_ID|HO_LLEGA|P|TIME_P|T_TRAFICO|\n")
         archivo.close()
         with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoCiclista.dat","w") as archivo:
-            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+            archivo.write("|_ID|HO_LLEGA|P|TIME_P|T_TRAFICO|\n")
         archivo.close()
         with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivoAuto.dat","w") as archivo:
-            archivo.write("|_ID|HO_LLEGA|P|T_TRAFICO|\n")
+            archivo.write("|_ID|HO_LLEGA|P|TIME_P|T_TRAFICO|\n")
         archivo.close()
         with open("C:\\Users\\sergi\\OneDrive\\Documentos\\GitHub\\Programacion\\PhytonProjects\\GeneracionSemaforo\\archivo.dat","r") as archivo:
             linea = archivo.__next__()
@@ -86,7 +87,7 @@ class Genera:
         
 
 genera = Genera()
-#genera.Crear()
+genera.Crear()
 genera.Procesar()
 #print(genera.lista)
 genera.Encolar()
