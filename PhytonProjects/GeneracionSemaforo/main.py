@@ -14,7 +14,7 @@ class Genera:
     listaAuto = []
     listaCicli = []
     listaPea = []
-
+    print("Hola, Mundo!")
     def Hora(self):
         horaactual = datetime.datetime.now()
         auxiliar = ""+str(horaactual.hour).zfill(2)+":"+str(horaactual.minute).zfill(2)+":"+str(horaactual.second).zfill(2)
