@@ -8,22 +8,17 @@ def cambiar_estado():
     canvas.itemconfig(luz_verde, fill="gray")
     mensaje.set("Semáforo: Rojo")
     root.update()
-    time.sleep(2)  # Espera 2 segundos
+    time.sleep(30)  # Espera 2 segundos
     canvas.itemconfig(luz_roja, fill="gray")
-    canvas.itemconfig(luz_amarilla, fill="yellow")
-    mensaje.set("Semáforo: Amarillo")
-    root.update()
-    time.sleep(1)  # Espera 1 segundo
-    canvas.itemconfig(luz_amarilla, fill="gray")
     canvas.itemconfig(luz_verde, fill="green")
     mensaje.set("Semáforo: Verde")
     root.update()
-    time.sleep(2)  # Espera 2 segundos
+    time.sleep(33)  # Espera 2 segundos
     canvas.itemconfig(luz_verde, fill="gray")
     canvas.itemconfig(luz_amarilla, fill="yellow")
     mensaje.set("Semáforo: Amarillo")
     root.update()
-    time.sleep(1)  # Espera 1 segundo
+    time.sleep(2)  # Espera 1 segundo
     cambiar_estado()  # Llama recursivamente para hacer un ciclo
 
 # Crear la ventana
