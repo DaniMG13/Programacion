@@ -3,7 +3,21 @@ import time
 import threading
 
 # Función para cambiar el estado de un semáforo
-def cambiar_estado(semaforo, tiempo_rojo, tiempo_verde, tiempo_amarillo):
+def cambiar_estado(semaforo, tiempo_rojo, tiempo_verde, tiempo_amarillo, estado_inicial):
+    if estado_inicial == "verde":
+        semaforo.itemconfig(luz_roja, fill="gray")
+        semaforo.itemconfig(luz_amarilla, fill="gray")
+        semaforo.itemconfig(luz_verde, fill="green")
+        mensaje.set("Semáforo: Verde")
+        root.update()
+        time.sleep(tiempo_verde)
+    else:
+        semaforo.itemconfig(luz_roja, fill="red")
+        semaforo.itemconfig(luz_amarilla, fill="gray")
+        semaforo.itemconfig(luz_verde, fill="gray")
+        mensaje.set("Semáforo: Rojo")
+        root.update()
+        time.sleep(tiempo_rojo)
     while True:
         semaforo.itemconfig(luz_roja, fill="red")
         semaforo.itemconfig(luz_amarilla, fill="gray")
@@ -45,29 +59,29 @@ semaforos_container = tk.Frame(root)
 semaforos_container.pack()
 
 # Crear el lienzo (canvas) para el primer semáforo (vertical)
-canvas1 = tk.Canvas(semaforos_container, width=100, height=300, bg="gray")
-canvas1.grid(row=0, column=0)
-luz_roja = canvas1.create_oval(30, 30, 70, 70, fill="gray")
-luz_amarilla = canvas1.create_oval(30, 110, 70, 150, fill="gray")
-luz_verde = canvas1.create_oval(30, 190, 70, 230, fill="gray")
+semaforoP = tk.Canvas(semaforos_container, width=100, height=300, bg="gray")
+semaforoP.grid(row=0, column=0)
+luz_roja = semaforoP.create_oval(30, 30, 70, 70, fill="gray")
+luz_amarilla = semaforoP.create_oval(30, 110, 70, 150, fill="gray")
+luz_verde = semaforoP.create_oval(30, 190, 70, 230, fill="gray")
 
 # Crear el lienzo (canvas) para el segundo semáforo (vertical)
-canvas2 = tk.Canvas(semaforos_container, width=100, height=300, bg="gray")
-canvas2.grid(row=0, column=1)
-luz_roja2 = canvas2.create_oval(30, 30, 70, 70, fill="gray")
-luz_amarilla2 = canvas2.create_oval(30, 110, 70, 150, fill="gray")
-luz_verde2 = canvas2.create_oval(30, 190, 70, 230, fill="gray")
+semaforoA = tk.Canvas(semaforos_container, width=100, height=300, bg="gray")
+semaforoA.grid(row=0, column=1)
+luz_roja2 = semaforoA.create_oval(30, 30, 70, 70, fill="gray")
+luz_amarilla2 = semaforoA.create_oval(30, 110, 70, 150, fill="gray")
+luz_verde2 = semaforoA.create_oval(30, 190, 70, 230, fill="gray")
 
 # Crear el lienzo (canvas) para el tercer semáforo (vertical)
-canvas3 = tk.Canvas(semaforos_container, width=100, height=300, bg="gray")
-canvas3.grid(row=0, column=2)
-luz_roja3 = canvas3.create_oval(30, 30, 70, 70, fill="gray")
-luz_amarilla3 = canvas3.create_oval(30, 110, 70, 150, fill="gray")
-luz_verde3 = canvas3.create_oval(30, 190, 70, 230, fill="gray")
+semaforoB = tk.Canvas(semaforos_container, width=100, height=300, bg="gray")
+semaforoB.grid(row=0, column=2)
+luz_roja3 = semaforoB.create_oval(30, 30, 70, 70, fill="gray")
+luz_amarilla3 = semaforoB.create_oval(30, 110, 70, 150, fill="gray")
+luz_verde3 = semaforoB.create_oval(30, 190, 70, 230, fill="gray")
 
-thread1 = threading.Thread(target=cambiar_estado, args=(canvas1, 30, 33, 2))
-thread2 = threading.Thread(target=cambiar_estado, args=(canvas2, 20, 25, 3))
-thread3 = threading.Thread(target=cambiar_estado, args=(canvas3, 15, 35, 5))
+thread1 = threading.Thread(target=cambiar_estado, args=(semaforoP, 10, 5, 1, "verde"))
+thread2 = threading.Thread(target=cambiar_estado, args=(semaforoA, 16, 10, 1, "rojo"))
+thread3 = threading.Thread(target=cambiar_estado, args=(semaforoB, 25, 10, 1, "rojo"))
 
 # Iniciar los hilos
 thread1.start()
