@@ -1,26 +1,42 @@
 import time
-semaforo = [["Rojo", 10], ["Rojo", 8], ["Rojo", 7]]
+import tkinter as tk
 
-def imprimir_semaforos():
-    print(semaforo[0][0]+" "+semaforo[1][0]+" "+semaforo[2][0])
+semaforo = [["red", 10], ["red", 8], ["red", 7]]
 
-def cambio_semaforo(semaforo):
-    if semaforo<2:
-        muestra_semaforo(semaforo+1)
-    else:
-        muestra_semaforo(0)
+def cambiar_semaforo(focus_semaforo):
+    semaforo[focus_semaforo][0] = "green"
+    actualizar_interfaz()
+    root.after(semaforo[focus_semaforo][1] * 1000, cambiar_a_amarillo, focus_semaforo)
 
+def cambiar_a_amarillo(focus_semaforo):
+    semaforo[focus_semaforo][0] = "yellow"
+    actualizar_interfaz()
+    root.after(2000, cambiar_a_rojo, focus_semaforo)
 
+def cambiar_a_rojo(focus_semaforo):
+    semaforo[focus_semaforo][0] = "red"
+    actualizar_interfaz()
+    siguiente_semaforo = (focus_semaforo + 1) % len(semaforo)
+    root.after(2000, lambda: cambiar_semaforo(siguiente_semaforo))
 
-def muestra_semaforo(focus_semaforo):
-    semaforo[focus_semaforo][0] = "Verde"
-    imprimir_semaforos()
-    time.sleep(semaforo[focus_semaforo][1])
-    semaforo[focus_semaforo][0] = "Amarillo"
-    imprimir_semaforos()
-    time.sleep(1)
-    semaforo[focus_semaforo][0] = "Rojo"
-    imprimir_semaforos()
-    cambio_semaforo(focus_semaforo)
-        
-muestra_semaforo(0)
+def actualizar_interfaz():
+    for i in range(3):
+        color = semaforo[i][0]
+        canvas.itemconfig(circulos[i], fill=color)
+
+root = tk.Tk()
+root.title("Simulación de Semáforos")
+
+canvas = tk.Canvas(root, width=200, height=400)
+canvas.pack()
+
+circulos = []
+
+for i in range(3):
+    color = semaforo[i][0]
+    circulo = canvas.create_oval(80, 40 + i * 120, 120, 80 + i * 120, fill=color)
+    circulos.append(circulo)
+
+cambiar_semaforo(0)
+
+root.mainloop()
