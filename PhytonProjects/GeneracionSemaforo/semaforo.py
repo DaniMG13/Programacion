@@ -4,7 +4,7 @@ import threading
 
 # Función para cambiar el estado de un semáforo
 def cambiar_estado(semaforo, tiempo_rojo, tiempo_verde, tiempo_amarillo, estado_inicial):
-    if estado_inicial == "verde":
+    """if estado_inicial == 0:
         semaforo.itemconfig(luz_roja, fill="gray")
         semaforo.itemconfig(luz_amarilla, fill="gray")
         semaforo.itemconfig(luz_verde, fill="green")
@@ -17,7 +17,28 @@ def cambiar_estado(semaforo, tiempo_rojo, tiempo_verde, tiempo_amarillo, estado_
         semaforo.itemconfig(luz_verde, fill="gray")
         mensaje.set("Semáforo: Rojo")
         root.update()
+        time.sleep(tiempo_rojo)"""
+    while True:
+        semaforo.itemconfig(luz_roja, fill="gray")
+        semaforo.itemconfig(luz_verde, fill="green")
+        mensaje.set("Semáforo: Verde")
+        root.update()
+        time.sleep(tiempo_verde)
+        
+        semaforo.itemconfig(luz_verde, fill="gray")
+        semaforo.itemconfig(luz_amarilla, fill="yellow")
+        mensaje.set("Semáforo: Amarillo")
+        root.update()
+        time.sleep(tiempo_amarillo)
+
+        semaforo.itemconfig(luz_roja, fill="red")
+        semaforo.itemconfig(luz_amarilla, fill="gray")
+        semaforo.itemconfig(luz_verde, fill="gray")
+        mensaje.set("Semáforo: Rojo")
+        root.update()
         time.sleep(tiempo_rojo)
+
+def cambiar_estado2(semaforo, tiempo_rojo, tiempo_verde, tiempo_amarillo, estado_inicial):    
     while True:
         semaforo.itemconfig(luz_roja, fill="red")
         semaforo.itemconfig(luz_amarilla, fill="gray")
@@ -25,7 +46,7 @@ def cambiar_estado(semaforo, tiempo_rojo, tiempo_verde, tiempo_amarillo, estado_
         mensaje.set("Semáforo: Rojo")
         root.update()
         time.sleep(tiempo_rojo)
-        
+
         semaforo.itemconfig(luz_roja, fill="gray")
         semaforo.itemconfig(luz_verde, fill="green")
         mensaje.set("Semáforo: Verde")
@@ -79,9 +100,9 @@ luz_roja3 = semaforoB.create_oval(30, 30, 70, 70, fill="gray")
 luz_amarilla3 = semaforoB.create_oval(30, 110, 70, 150, fill="gray")
 luz_verde3 = semaforoB.create_oval(30, 190, 70, 230, fill="gray")
 
-thread1 = threading.Thread(target=cambiar_estado, args=(semaforoP, 10, 5, 1, "verde"))
-thread2 = threading.Thread(target=cambiar_estado, args=(semaforoA, 16, 10, 1, "rojo"))
-thread3 = threading.Thread(target=cambiar_estado, args=(semaforoB, 25, 10, 1, "rojo"))
+thread1 = threading.Thread(target=cambiar_estado, args=(semaforoP, 21, 5, 1, 0))
+thread2 = threading.Thread(target=cambiar_estado, args=(semaforoA, 17, 9, 1, 1))
+thread3 = threading.Thread(target=cambiar_estado2, args=(semaforoB, 16, 10, 1, 1))
 
 # Iniciar los hilos
 thread1.start()
